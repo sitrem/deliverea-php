@@ -1,0 +1,8 @@
+{
+  "name": "deliverea/deliverea-php",
+  "autoload": {
+    "psr-4" : {
+      "Deliverea\\" : "src/Deliverea"
+    }
+  }
+}
