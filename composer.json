@@ -4,5 +4,8 @@
     "psr-4" : {
       "Deliverea\\" : "src/Deliverea"
     }
+  },
+  "require": {
+    "php": "^5.5"
   }
 }
