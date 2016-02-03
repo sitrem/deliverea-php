@@ -117,14 +117,16 @@ class Deliverea
     /**
      * @param bool $sandbox
      */
-    public function setSandbox($sandbox) {
-        $this->isSandbox  = $sandbox;
+    public function setSandbox($sandbox)
+    {
+        $this->isSandbox = $sandbox;
     }
 
     /**
      * @return bool
      */
-    public function getSandbox() {
+    public function getSandbox()
+    {
         return $this->isSandbox;
     }
 
@@ -150,7 +152,7 @@ class Deliverea
 
         $endpoint = $this->baseEndpoint;
 
-        if($this->getSandbox()) {
+        if ($this->getSandbox()) {
             $endpoint = $this->baseEndpointSandbox;
         }
 
@@ -189,7 +191,7 @@ class Deliverea
         }
 
         if ($result->status === 'err') {
-            if (property_exists($result->data, 'errorCode')) {
+            if (is_object($result->data) && property_exists($result->data, 'errorCode')) {
                 throw new ErrorResponseException($result->data->errorCode, $result->data->errorMessage);
             } else {
                 throw new ErrorResponseException(-1, $result->data[0]);
