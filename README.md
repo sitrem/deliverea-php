@@ -46,6 +46,9 @@ try {
 $deliverea = new \Deliverea\Deliverea('apiuser', 'apisecret');
 
 
+// Enable Sandbox
+$deliverea->setSandbox(true);
+
 // Create shipment
 $shipment = new \Deliverea\Model\Shipment(1, substr(md5(strtotime('now')), 0, 14), new \DateTime(), 'custom',
     'ovirtual', 'ovirtual-servicio-19');
