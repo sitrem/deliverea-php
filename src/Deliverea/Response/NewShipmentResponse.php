@@ -2,6 +2,8 @@
 
 namespace Deliverea\Response;
 
+use Deliverea\Common\ToArrayTrait;
+
 class NewShipmentResponse extends AbstractResponse
 {
     /** @var string */
@@ -27,6 +29,8 @@ class NewShipmentResponse extends AbstractResponse
 
     /** @var string */
     protected $carrier_phone;
+
+    use ToArrayTrait;
 
     /**
      * @return string

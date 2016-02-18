@@ -1,8 +1,12 @@
 <?php
 namespace Deliverea\Model;
 
-class DetailedShipment
+use Deliverea\Common\ToArrayTrait;
+
+class DetailedShipment extends AbstractDeliverea
 {
+    use ToArrayTrait;
+
     /** @var Shipment */
     private $shipment;
 

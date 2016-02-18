@@ -4,6 +4,7 @@ namespace Deliverea\Response;
 
 use Deliverea\Common\CreateAddressTrait;
 use Deliverea\Common\CreateShipmentTrait;
+use Deliverea\Common\ToArrayTrait;
 use Deliverea\Model\DetailedShipment;
 
 class GetShipmentsResponse extends AbstractResponse
@@ -13,6 +14,8 @@ class GetShipmentsResponse extends AbstractResponse
     protected $n_shipments = 0;
 
     protected $shipments = [];
+
+    use ToArrayTrait;
 
     use CreateAddressTrait;
 

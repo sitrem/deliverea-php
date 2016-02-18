@@ -2,8 +2,12 @@
 
 namespace Deliverea\Model;
 
-class Address
+use Deliverea\Common\ToArrayTrait;
+
+class Address extends AbstractDeliverea
 {
+    use ToArrayTrait;
+
     /** @var */
     private $addressId;
 

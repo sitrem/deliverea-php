@@ -1,8 +1,12 @@
 <?php
 namespace Deliverea\Model;
 
-class TrackingEvent
+use Deliverea\Common\ToArrayTrait;
+
+class TrackingEvent extends AbstractDeliverea
 {
+    use ToArrayTrait;
+
     /** @var string */
     private $tracking_code;
 

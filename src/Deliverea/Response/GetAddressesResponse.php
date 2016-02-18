@@ -3,9 +3,11 @@
 namespace Deliverea\Response;
 
 use Deliverea\Common\CreateAddressTrait;
+use Deliverea\Common\ToArrayTrait;
 
 class GetAddressesResponse extends AbstractResponse
 {
+    use ToArrayTrait;
     use CreateAddressTrait;
 
     /** @var array */

@@ -2,8 +2,12 @@
 
 namespace Deliverea\Response;
 
-class GetShipmentLabelResponse extends AbstractResponse
+use Deliverea\Common\ToArrayTrait;
+
+class GetShipmentLabelResponse extends AbstractDeliverea
 {
+    use ToArrayTrait;
+
     /** @var string */
     protected $shipping_dlvr_ref;
 

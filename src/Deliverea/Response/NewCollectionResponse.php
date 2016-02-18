@@ -2,8 +2,11 @@
 
 namespace Deliverea\Response;
 
+use Deliverea\Common\ToArrayTrait;
+
 class NewCollectionResponse extends AbstractResponse
 {
+
     /** @var string */
     protected $collection_dlvr_ref;
 
@@ -24,6 +27,8 @@ class NewCollectionResponse extends AbstractResponse
 
     /** @var string */
     protected $carrier_phone;
+
+    use ToArrayTrait;
 
     /**
      * @return string

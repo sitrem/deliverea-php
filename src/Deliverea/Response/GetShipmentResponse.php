@@ -5,12 +5,15 @@ namespace Deliverea\Response;
 use Deliverea\Common\CreateAddressTrait;
 use Deliverea\Common\CreateShipmentTrait;
 use Deliverea\Common\CreateTrackingEventTrait;
+use Deliverea\Common\ToArrayTrait;
 use Deliverea\Model\DetailedShipment;
 use Deliverea\Model\TrackingEvents;
 
 class GetShipmentResponse extends AbstractResponse
 {
     protected $shipment;
+
+    use ToArrayTrait;
 
     use CreateAddressTrait;
 

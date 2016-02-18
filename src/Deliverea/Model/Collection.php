@@ -1,8 +1,12 @@
 <?php
 namespace Deliverea\Model;
 
-class Collection
+use Deliverea\Common\ToArrayTrait;
+
+class Collection extends AbstractDeliverea
 {
+    use ToArrayTrait;
+
     /** @var \DateTime */
     private $collection_date;
 
