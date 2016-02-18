@@ -32,7 +32,7 @@ class GetShipmentResponse extends AbstractResponse
 
         $events = [];
         foreach ($response->tracking_events->tracking_history as $event) {
-            $events = $this->createTrackingEvent($event);
+            $events[] = $this->createTrackingEvent($event);
         }
 
         $trackingEvents = new TrackingEvents($this->createTrackingEvent($response->tracking_events), $events);
