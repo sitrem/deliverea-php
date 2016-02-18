@@ -30,6 +30,9 @@ class Address extends AbstractDeliverea
     private $street_number;
 
     /** @var string */
+    private $address;
+
+    /** @var string */
     private $floor;
 
     /** @var string */
@@ -198,6 +201,22 @@ class Address extends AbstractDeliverea
     public function setFloor($floor)
     {
         $this->floor = $floor;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param string $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
     }
 
     /**
