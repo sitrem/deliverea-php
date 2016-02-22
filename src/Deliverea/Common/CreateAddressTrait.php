@@ -19,7 +19,7 @@ trait CreateAddressTrait
             $prefix .= '_';
         }
 
-        if (!empty($data['name'])) {
+        if (!empty($data[$prefix . 'name'])) {
             $name = $this->getValue($data, $prefix . 'name', '');
         } else {
             $name = $this->getValue($data, $prefix . 'alias', '');
