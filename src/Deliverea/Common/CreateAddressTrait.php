@@ -40,7 +40,7 @@ trait CreateAddressTrait
         $address->setAddress($this->getValue($data, $prefix . 'address', ''));
         $address->setNif($this->getValue($data, $prefix . 'nif', ''));
         $address->setAttn($this->getValue($data, $prefix . 'attn', ''));
-        $address->setEmail($this->getValue($data, $prefix . 'floor', ''));
+        $address->setEmail($this->getValue($data, $prefix . 'email', ''));
         $address->setObservations($this->getValue($data, $prefix . 'observations', ''));
 
         return $address;
