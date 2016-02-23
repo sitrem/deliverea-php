@@ -28,8 +28,8 @@ trait CreateAddressTrait
         $address = new Address(
             $name,
             $this->getValue($data, $prefix . 'street_type', ''),
-            $this->getValue($data, $prefix . 'street_number', ''),
             $this->getValue($data, $prefix . 'street_name', ''),
+            $this->getValue($data, $prefix . 'street_number', ''),
             $this->getValue($data, $prefix . 'floor', ''),
             $this->getValue($data, $prefix . 'city', ''),
             $this->getValue($data, $prefix . 'zip_code', ''),
