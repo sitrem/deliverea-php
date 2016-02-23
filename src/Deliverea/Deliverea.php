@@ -8,6 +8,7 @@ use Deliverea\Model\Collection;
 use Deliverea\Model\Address;
 use Deliverea\Model\Shipment;
 use Deliverea\Request\GetAddressesRequest;
+use Deliverea\Request\GetCollectionsRequest;
 use Deliverea\Request\GetShipmentLabelRequest;
 use Deliverea\Request\GetShipmentRequest;
 use Deliverea\Request\GetShipmentsRequest;
@@ -16,6 +17,7 @@ use Deliverea\Request\NewCollectionRequest;
 use Deliverea\Request\NewShipmentRequest;
 use Deliverea\Response\AbstractResponse;
 use Deliverea\Response\GetAddressesResponse;
+use Deliverea\Response\GetCollectionsResponse;
 use Deliverea\Response\GetShipmentLabelResponse;
 use Deliverea\Response\GetShipmentResponse;
 use Deliverea\Response\GetShipmentsResponse;
@@ -84,6 +86,15 @@ class Deliverea
     public function getShipments($filters = [])
     {
         return $this->get('get-shipments', new GetShipmentsRequest($filters), new GetShipmentsResponse());
+    }
+
+    /**
+     * @param array $filters
+     * @return array
+     */
+    public function getCollections($filters = [])
+    {
+        return $this->get('get-collections', new GetCollectionsRequest($filters), new GetCollectionsResponse());
     }
 
     /**

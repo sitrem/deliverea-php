@@ -2,7 +2,7 @@
 
 namespace Deliverea\Request;
 
-class GetShipmentsRequest
+class GetCollectionsRequest
 {
     /** @var string */
     public $filter_search_type = '';

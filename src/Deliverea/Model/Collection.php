@@ -20,6 +20,12 @@ class Collection extends AbstractDeliverea
     private $collection_client_ref;
 
     /** @var string */
+    private $collection_dlvr_ref;
+
+    /** @var string */
+    private $collection_carrier_ref;
+
+    /** @var string */
     private $hour_start_1;
 
     /** @var string */
@@ -30,6 +36,9 @@ class Collection extends AbstractDeliverea
 
     /** @var string H:i */
     private $hour_end_2;
+
+    /** @var \DateTime */
+    private $creation_date;
 
     /**
      * @param $collection_client_ref
@@ -122,6 +131,38 @@ class Collection extends AbstractDeliverea
     /**
      * @return string
      */
+    public function getCollectionDlvrRef()
+    {
+        return $this->collection_dlvr_ref;
+    }
+
+    /**
+     * @param string $collection_dlvr_ref
+     */
+    public function setCollectionDlvrRef($collection_dlvr_ref)
+    {
+        $this->collection_dlvr_ref = $collection_dlvr_ref;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCollectionCarrierRef()
+    {
+        return $this->collection_carrier_ref;
+    }
+
+    /**
+     * @param string $collection_carrier_ref
+     */
+    public function setCollectionCarrierRef($collection_carrier_ref)
+    {
+        $this->collection_carrier_ref = $collection_carrier_ref;
+    }
+
+    /**
+     * @return string
+     */
     public function getHourStart1()
     {
         return $this->hour_start_1;
@@ -183,4 +224,19 @@ class Collection extends AbstractDeliverea
         $this->hour_end_2 = $hour_end_2;
     }
 
+    /**
+     * @return \DateTime
+     */
+    public function getCreationDate()
+    {
+        return $this->creation_date;
+    }
+
+    /**
+     * @param \DateTime $creation_date
+     */
+    public function setCreationDate($creation_date)
+    {
+        $this->creation_date = $creation_date;
+    }
 }
