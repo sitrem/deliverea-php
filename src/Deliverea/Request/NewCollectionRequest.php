@@ -57,6 +57,9 @@ class NewCollectionRequest
     public $to_floor;
 
     /** @var string */
+    public $to_address;
+
+    /** @var string */
     public $to_city;
 
     /** @var string */
@@ -88,10 +91,16 @@ class NewCollectionRequest
         $this->to_nif = $to->getNif();
         $this->to_name = $to->getName();
         $this->to_attn = $to->getAttn();
-        $this->to_street_type = $to->getStreetType();
-        $this->to_street_name = $to->getStreetName();
-        $this->to_street_number = $to->getStreetNumber();
-        $this->to_floor = $to->getFloor();
+
+        if ($to->getAddress()) {
+            $this->to_address = $to->getAddress();
+        } else {
+            $this->to_street_type = $to->getStreetType();
+            $this->to_street_name = $to->getStreetName();
+            $this->to_street_number = $to->getStreetNumber();
+            $this->to_floor = $to->getFloor();
+        }
+
         $this->to_city = $to->getCity();
         $this->to_zip_code = $to->getZipCode();
         $this->to_country_code = $to->getCountryCode();

@@ -4,7 +4,7 @@ namespace Deliverea\Response;
 
 use Deliverea\Common\ToArrayTrait;
 
-class GetShipmentLabelResponse extends AbstractDeliverea
+class GetShipmentLabelResponse extends AbstractResponse
 {
     use ToArrayTrait;
 
