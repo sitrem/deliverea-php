@@ -52,6 +52,12 @@ class Shipment extends AbstractDeliverea
     /** @var \DateTime */
     private $creation_date;
 
+    /** @var string */
+    private $return_dlvr_ref;
+
+    /** @var bool */
+    private $is_return = false;
+
     /**
      * @param $parcel_number
      * @param $shipping_client_ref
@@ -315,4 +321,37 @@ class Shipment extends AbstractDeliverea
     {
         $this->creation_date = $creation_date;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getReturnDlvrRef()
+    {
+        return $this->return_dlvr_ref;
+    }
+
+    /**
+     * @param mixed $return_dlvr_ref
+     */
+    public function setReturnDlvrRef($return_dlvr_ref)
+    {
+        $this->return_dlvr_ref = $return_dlvr_ref;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getIsReturn()
+    {
+        return $this->is_return;
+    }
+
+    /**
+     * @param boolean $is_return
+     */
+    public function setIsReturn($is_return)
+    {
+        $this->is_return = $is_return;
+    }
+
 }
