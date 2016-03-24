@@ -43,6 +43,9 @@ class NewShipmentRequest
     /** @var int */
     public $docs_number;
 
+    /** @var */
+    public $cash_on_delivery;
+
     /** @var int */
     public $from_address_id;
 
@@ -102,6 +105,7 @@ class NewShipmentRequest
         $this->service_code = $shipment->getServiceCode();
         $this->shipping_client_ref = $shipment->getShippingClientRef();
         $this->docs_number = $shipment->getDocsNumber();
+        $this->cash_on_delivery = $shipment->getCashOnDelivery();
         $this->from_address_id = $from_address_id;
         $this->to_nif = $to->getNif();
         $this->to_name = $to->getName();

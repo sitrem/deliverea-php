@@ -14,7 +14,7 @@ trait CreateShipmentTrait
     {
         $details = $data;
 
-        if(!empty($data->shipping_data)) {
+        if (!empty($data->shipping_data)) {
             $details = array_merge((array)$data->shipping_data, (array)$data->parcel_data);
         }
 
@@ -30,6 +30,7 @@ trait CreateShipmentTrait
         $shipment->setShippingDlvrRef($this->getValue($details, 'shipping_dlvr_ref', ''));
         $shipment->setShippingCarrierRef($this->getValue($details, 'shipping_carrier_ref', ''));
         $shipment->setDocsNumber($this->getValue($details, 'docs_number', 0));
+        $shipment->setCashOnDelivery($this->getValue($details, 'cash_on_delivery', 0));
 
         $shipment->setParcelWeight($this->getValue($details, 'parcel_weight', 0));
         $shipment->setParcelWidth($this->getValue($details, 'parcel_width', 0));

@@ -31,6 +31,9 @@ class Shipment extends AbstractDeliverea
     /** @var int */
     private $docs_number;
 
+    /** @var */
+    private $cash_on_delivery;
+
     /** @var string */
     private $service_type;
 
@@ -267,6 +270,23 @@ class Shipment extends AbstractDeliverea
     {
         $this->docs_number = $docs_number;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCashOnDelivery()
+    {
+        return $this->cash_on_delivery;
+    }
+
+    /**
+     * @param mixed $cash_on_delivery
+     */
+    public function setCashOnDelivery($cash_on_delivery)
+    {
+        $this->cash_on_delivery = $cash_on_delivery;
+    }
+
 
     /**
      * @return string
