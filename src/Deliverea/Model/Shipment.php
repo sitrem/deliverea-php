@@ -31,6 +31,9 @@ class Shipment extends AbstractDeliverea
     /** @var int */
     private $docs_number;
 
+    /** @var */
+    private $cash_on_delivery;
+
     /** @var string */
     private $service_type;
 
@@ -51,6 +54,12 @@ class Shipment extends AbstractDeliverea
 
     /** @var \DateTime */
     private $creation_date;
+
+    /** @var string */
+    private $return_dlvr_ref;
+
+    /** @var bool */
+    private $is_return = false;
 
     /**
      * @param $parcel_number
@@ -269,6 +278,23 @@ class Shipment extends AbstractDeliverea
     }
 
     /**
+     * @return mixed
+     */
+    public function getCashOnDelivery()
+    {
+        return $this->cash_on_delivery;
+    }
+
+    /**
+     * @param mixed $cash_on_delivery
+     */
+    public function setCashOnDelivery($cash_on_delivery)
+    {
+        $this->cash_on_delivery = $cash_on_delivery;
+    }
+
+
+    /**
      * @return string
      */
     public function getShippingDlvrRef()
@@ -315,4 +341,37 @@ class Shipment extends AbstractDeliverea
     {
         $this->creation_date = $creation_date;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getReturnDlvrRef()
+    {
+        return $this->return_dlvr_ref;
+    }
+
+    /**
+     * @param mixed $return_dlvr_ref
+     */
+    public function setReturnDlvrRef($return_dlvr_ref)
+    {
+        $this->return_dlvr_ref = $return_dlvr_ref;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getIsReturn()
+    {
+        return $this->is_return;
+    }
+
+    /**
+     * @param boolean $is_return
+     */
+    public function setIsReturn($is_return)
+    {
+        $this->is_return = $is_return;
+    }
+
 }

@@ -32,6 +32,9 @@ class NewCollectionRequest
     /** @var string H:i */
     public $hour_end_2;
 
+    /** @var */
+    public $cash_on_delivery;
+
     /** @var int */
     public $from_address_id;
 
@@ -87,6 +90,7 @@ class NewCollectionRequest
         $this->hour_end_1 = $collection->getHourEnd1();
         $this->hour_start_2 = $collection->getHourStart2();
         $this->hour_end_2 = $collection->getHourEnd2();
+        $this->cash_on_delivery = $collection->getCashOnDelivery();
         $this->from_address_id = $from_address_id;
         $this->to_nif = $to->getNif();
         $this->to_name = $to->getName();

@@ -37,6 +37,9 @@ class Collection extends AbstractDeliverea
     /** @var string H:i */
     private $hour_end_2;
 
+    /** @var */
+    private $cash_on_delivery;
+
     /** @var \DateTime */
     private $creation_date;
 
@@ -222,6 +225,22 @@ class Collection extends AbstractDeliverea
     public function setHourEnd2($hour_end_2)
     {
         $this->hour_end_2 = $hour_end_2;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCashOnDelivery()
+    {
+        return $this->cash_on_delivery;
+    }
+
+    /**
+     * @param mixed $cash_on_delivery
+     */
+    public function setCashOnDelivery($cash_on_delivery)
+    {
+        $this->cash_on_delivery = $cash_on_delivery;
     }
 
     /**

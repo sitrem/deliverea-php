@@ -43,6 +43,9 @@ class NewShipmentRequest
     /** @var int */
     public $docs_number;
 
+    /** @var */
+    public $cash_on_delivery;
+
     /** @var int */
     public $from_address_id;
 
@@ -88,6 +91,12 @@ class NewShipmentRequest
     /** @var string */
     public $to_observations;
 
+    /** @var string */
+    public $return_dlvr_ref;
+
+    /** @var bool */
+    public $is_return;
+
     public function __construct(Shipment $shipment, $from_address_id, Address $to)
     {
         $this->parcel_number = $shipment->getParcelNumber();
@@ -102,10 +111,13 @@ class NewShipmentRequest
         $this->service_code = $shipment->getServiceCode();
         $this->shipping_client_ref = $shipment->getShippingClientRef();
         $this->docs_number = $shipment->getDocsNumber();
+        $this->cash_on_delivery = $shipment->getCashOnDelivery();
         $this->from_address_id = $from_address_id;
         $this->to_nif = $to->getNif();
         $this->to_name = $to->getName();
         $this->to_attn = $to->getAttn();
+        $this->return_dlvr_ref = $shipment->getReturnDlvrRef();
+        $this->is_return = intval($shipment->getIsReturn());
 
         if ($to->getAddress()) {
             $this->to_address = $to->getAddress();
