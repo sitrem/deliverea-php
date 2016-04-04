@@ -9,7 +9,7 @@ class Address extends AbstractDeliverea
     use ToArrayTrait;
 
     /** @var */
-    private $addressId;
+    private $address_id;
 
     /** @var string */
     private $nif;
@@ -80,7 +80,7 @@ class Address extends AbstractDeliverea
      */
     public function getAddressId()
     {
-        return $this->addressId;
+        return $this->address_id;
     }
 
     /**
@@ -88,7 +88,7 @@ class Address extends AbstractDeliverea
      */
     public function setAddressId($addressId)
     {
-        $this->addressId = $addressId;
+        $this->address_id = $addressId;
     }
 
     /**
