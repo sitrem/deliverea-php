@@ -8,7 +8,7 @@ Compatibility:
 
 ## Installation
 ```
-composer require deliverea/deliverea-php 0.0.4
+composer require deliverea/deliverea-php 0.0.5
 ```
 
 ## Methods
