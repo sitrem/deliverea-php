@@ -8,6 +8,7 @@ use Deliverea\Model\Collection;
 use Deliverea\Model\Address;
 use Deliverea\Model\Shipment;
 use Deliverea\Request\GetAddressesRequest;
+use Deliverea\Request\GetCollectionCutoffHour;
 use Deliverea\Request\GetCollectionsRequest;
 use Deliverea\Request\GetShipmentLabelRequest;
 use Deliverea\Request\GetShipmentRequest;
@@ -17,6 +18,7 @@ use Deliverea\Request\NewCollectionRequest;
 use Deliverea\Request\NewShipmentRequest;
 use Deliverea\Response\AbstractResponse;
 use Deliverea\Response\GetAddressesResponse;
+use Deliverea\Response\GetCollectionCutoffHourResponse;
 use Deliverea\Response\GetCollectionsResponse;
 use Deliverea\Response\GetShipmentLabelResponse;
 use Deliverea\Response\GetShipmentResponse;
@@ -123,6 +125,17 @@ class Deliverea
     {
         return $this->get('get-addresses', new GetAddressesRequest(),
             new GetAddressesResponse());
+    }
+
+    /**
+     * @param $carrierCode
+     * @param $fromAddressId
+     * @return GetCollectionCutoffHourResponse
+     */
+    public function getCollectionCutoffHour($carrierCode, $fromAddressId)
+    {
+        return $this->get('get-collection-cutoff-hour', new GetCollectionCutoffHour($carrierCode, $fromAddressId),
+            new GetCollectionCutoffHourResponse());
     }
 
     /**
