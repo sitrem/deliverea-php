@@ -31,7 +31,7 @@ class Shipment extends AbstractDeliverea
     /** @var int */
     private $docs_number;
 
-    /** @var */
+    /** @var double */
     private $cash_on_delivery;
 
     /** @var string */
@@ -60,6 +60,9 @@ class Shipment extends AbstractDeliverea
 
     /** @var bool */
     private $is_return = false;
+
+    /** @var array */
+    private $custom_carrier_parameters = [];
 
     /**
      * @param $parcel_number
@@ -374,4 +377,21 @@ class Shipment extends AbstractDeliverea
         $this->is_return = $is_return;
     }
 
+    /**
+     * @return array
+     */
+    public function getCustomCarrierParameters()
+    {
+        return $this->custom_carrier_parameters;
+    }
+
+    /**
+     * @param $parameter
+     * @param $value
+     * @return $this
+     */
+    public function addCustomCarrierParameter($parameter, $value)
+    {
+        $this->custom_carrier_parameters[$parameter] = $value;
+    }
 }

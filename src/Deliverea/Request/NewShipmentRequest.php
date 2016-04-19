@@ -97,6 +97,9 @@ class NewShipmentRequest
     /** @var bool */
     public $is_return;
 
+    /** @var array */
+    public $custom_carrier_parameters;
+
     public function __construct(Shipment $shipment, $from_address_id, Address $to)
     {
         $this->parcel_number = $shipment->getParcelNumber();
@@ -118,6 +121,7 @@ class NewShipmentRequest
         $this->to_attn = $to->getAttn();
         $this->return_dlvr_ref = $shipment->getReturnDlvrRef();
         $this->is_return = intval($shipment->getIsReturn());
+        $this->custom_carrier_parameters = $shipment->getCustomCarrierParameters();
 
         if ($to->getAddress()) {
             $this->to_address = $to->getAddress();

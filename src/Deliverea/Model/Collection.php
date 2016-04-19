@@ -37,8 +37,11 @@ class Collection extends AbstractDeliverea
     /** @var string H:i */
     private $hour_end_2;
 
-    /** @var */
+    /** @var double */
     private $cash_on_delivery;
+
+    /** @var array */
+    private $custom_carrier_parameters;
 
     /** @var \DateTime */
     private $creation_date;
@@ -257,5 +260,23 @@ class Collection extends AbstractDeliverea
     public function setCreationDate($creation_date)
     {
         $this->creation_date = $creation_date;
+    }
+
+    /**
+     * @return array
+     */
+    public function getCustomCarrierParameters()
+    {
+        return $this->custom_carrier_parameters;
+    }
+
+    /**
+     * @param $parameter
+     * @param $value
+     * @return $this
+     */
+    public function addCustomCarrierParameter($parameter, $value)
+    {
+        $this->custom_carrier_parameters[$parameter] = $value;
     }
 }

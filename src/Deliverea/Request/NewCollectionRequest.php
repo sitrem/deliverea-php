@@ -80,6 +80,9 @@ class NewCollectionRequest
     /** @var string */
     public $to_observations;
 
+    /** @var array */
+    public $custom_carrier_parameters;
+
     public function __construct(Collection $collection, $from_address_id, Address $to)
     {
         $this->collection_date = $collection->getCollectionDate()->format('Y-m-d');
@@ -92,6 +95,8 @@ class NewCollectionRequest
         $this->hour_end_2 = $collection->getHourEnd2();
         $this->cash_on_delivery = $collection->getCashOnDelivery();
         $this->from_address_id = $from_address_id;
+        $this->custom_carrier_parameters = $collection->getCustomCarrierParameters();
+
         $this->to_nif = $to->getNif();
         $this->to_name = $to->getName();
         $this->to_attn = $to->getAttn();
