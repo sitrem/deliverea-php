@@ -41,6 +41,9 @@ class Shipment extends AbstractDeliverea
     private $carrier_code;
 
     /** @var string */
+    private $original_service_code;
+
+    /** @var string */
     private $service_code;
 
     /** @var string */
@@ -227,6 +230,22 @@ class Shipment extends AbstractDeliverea
     public function setCarrierCode($carrier_code)
     {
         $this->carrier_code = $carrier_code;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOriginalServiceCode()
+    {
+        return $this->original_service_code;
+    }
+
+    /**
+     * @param mixed $original_service_code
+     */
+    public function setOriginalServiceCode($original_service_code)
+    {
+        $this->original_service_code = $original_service_code;
     }
 
     /**

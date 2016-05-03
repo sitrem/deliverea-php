@@ -27,6 +27,7 @@ trait CreateShipmentTrait
             $this->getValue($details, 'service_code', '')
         );
 
+        $shipment->setOriginalServiceCode($this->getValue($details, 'original_service_code', ''));
         $shipment->setShippingDlvrRef($this->getValue($details, 'shipping_dlvr_ref', ''));
         $shipment->setShippingCarrierRef($this->getValue($details, 'shipping_carrier_ref', ''));
         $shipment->setDocsNumber($this->getValue($details, 'docs_number', 0));
