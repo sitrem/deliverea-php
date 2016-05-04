@@ -80,7 +80,20 @@ class NewCollectionRequest
     /** @var string */
     public $to_observations;
 
-    public function __construct(Collection $collection, $from_address_id, Address $to)
+    /** @var string */
+    public $from_address;
+
+    public $from_name;
+
+    public $from_phone;
+
+    public $from_city;
+
+    public $from_country_code;
+
+    public $from_zip_code;
+
+    public function __construct(Collection $collection, Address $from, Address $to)
     {
         $this->collection_date = $collection->getCollectionDate()->format('Y-m-d');
         $this->carrier_code = $collection->getCarrierCode();
@@ -91,20 +104,19 @@ class NewCollectionRequest
         $this->hour_start_2 = $collection->getHourStart2();
         $this->hour_end_2 = $collection->getHourEnd2();
         $this->cash_on_delivery = $collection->getCashOnDelivery();
-        $this->from_address_id = $from_address_id;
+
+        $this->from_address = $from->getAddress();
+        $this->from_country_code = $from->getCountryCode();
+        $this->from_name = $from->getName();
+        $this->from_city = $from->getCity();
+        $this->from_phone = $from->getPhone();
+        $this->from_zip_code = $from->getZipCode();
+
         $this->to_nif = $to->getNif();
         $this->to_name = $to->getName();
         $this->to_attn = $to->getAttn();
 
-        if ($to->getAddress()) {
-            $this->to_address = $to->getAddress();
-        } else {
-            $this->to_street_type = $to->getStreetType();
-            $this->to_street_name = $to->getStreetName();
-            $this->to_street_number = $to->getStreetNumber();
-            $this->to_floor = $to->getFloor();
-        }
-
+        $this->to_address = $to->getAddress();
         $this->to_city = $to->getCity();
         $this->to_zip_code = $to->getZipCode();
         $this->to_country_code = $to->getCountryCode();

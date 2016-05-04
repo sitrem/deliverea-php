@@ -50,6 +50,21 @@ class NewShipmentRequest
     public $from_address_id;
 
     /** @var string */
+    public $from_name;
+
+    /** @var string */
+    public $from_city;
+
+    /** @var string */
+    public $from_country_code;
+
+    /** @var string */
+    public $from_phone;
+
+    /** @var string */
+    public $from_zip_code;
+
+    /** @var string */
     public $to_nif;
 
     /** @var string */
@@ -97,7 +112,7 @@ class NewShipmentRequest
     /** @var bool */
     public $is_return;
 
-    public function __construct(Shipment $shipment, $from_address_id, Address $to)
+    public function __construct(Shipment $shipment, $from, Address $to)
     {
         $this->parcel_number = $shipment->getParcelNumber();
         $this->parcel_weight = $shipment->getParcelWeight();
@@ -112,27 +127,25 @@ class NewShipmentRequest
         $this->shipping_client_ref = $shipment->getShippingClientRef();
         $this->docs_number = $shipment->getDocsNumber();
         $this->cash_on_delivery = $shipment->getCashOnDelivery();
-        $this->from_address_id = $from_address_id;
+
+        $this->from_name = $from->getName();
+        $this->from_city = $from->getCity();
+        $this->from_country_code = $from->getCountryCode();
+        $this->from_phone = $from->getPhone();
+        $this->from_zip_code = $from->getZipCode();
+        $this->from_address = $from->getAddress();
+
         $this->to_nif = $to->getNif();
         $this->to_name = $to->getName();
         $this->to_attn = $to->getAttn();
         $this->return_dlvr_ref = $shipment->getReturnDlvrRef();
-        $this->is_return = intval($shipment->getIsReturn());
-
-        if ($to->getAddress()) {
-            $this->to_address = $to->getAddress();
-        } else {
-            $this->to_street_type = $to->getStreetType();
-            $this->to_street_name = $to->getStreetName();
-            $this->to_street_number = $to->getStreetNumber();
-            $this->to_floor = $to->getFloor();
-        }
-
+        $this->to_address = $to->getAddress();
         $this->to_city = $to->getCity();
         $this->to_zip_code = $to->getZipCode();
         $this->to_country_code = $to->getCountryCode();
         $this->to_phone = $to->getPhone();
         $this->to_email = $to->getEmail();
         $this->to_observations = $to->getObservations();
+        $this->is_return = intval($shipment->getIsReturn());
     }
 }

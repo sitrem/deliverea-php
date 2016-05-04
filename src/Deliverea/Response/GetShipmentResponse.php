@@ -27,8 +27,8 @@ class GetShipmentResponse extends AbstractResponse
     function map($response)
     {
         $shipment = $this->createShipment($response);
-        $from = $this->createAddress('from', $response->from_data);
         $to = $this->createAddress('to', $response->to_data);
+        $from = $this->createAddress('from', $response->from_data);
 
         $events = [];
         foreach ($response->tracking_events->tracking_history as $event) {
