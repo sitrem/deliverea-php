@@ -21,19 +21,7 @@ class Address extends AbstractDeliverea
     private $attn;
 
     /** @var string */
-    private $street_type;
-
-    /** @var string */
-    private $street_name;
-
-    /** @var string */
-    private $street_number;
-
-    /** @var string */
     private $address;
-
-    /** @var string */
-    private $floor;
 
     /** @var string */
     private $city;
@@ -55,20 +43,15 @@ class Address extends AbstractDeliverea
 
     public function __construct(
         $name,
-        $street_type,
-        $street_name,
-        $street_number,
-        $floor,
+        $address,
         $city,
         $zip_code,
         $country_code,
         $phone
-    ) {
+    )
+    {
         $this->name = $name;
-        $this->street_type = $street_type;
-        $this->street_name = $street_name;
-        $this->street_number = $street_number;
-        $this->floor = $floor;
+        $this->address = $address;
         $this->city = $city;
         $this->zip_code = $zip_code;
         $this->country_code = $country_code;
@@ -137,70 +120,6 @@ class Address extends AbstractDeliverea
     public function setAttn($attn)
     {
         $this->attn = $attn;
-    }
-
-    /**
-     * @return string
-     */
-    public function getStreetType()
-    {
-        return $this->street_type;
-    }
-
-    /**
-     * @param string $street_type
-     */
-    public function setStreetType($street_type)
-    {
-        $this->street_type = $street_type;
-    }
-
-    /**
-     * @return string
-     */
-    public function getStreetName()
-    {
-        return $this->street_name;
-    }
-
-    /**
-     * @param string $street_name
-     */
-    public function setStreetName($street_name)
-    {
-        $this->street_name = $street_name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getStreetNumber()
-    {
-        return $this->street_number;
-    }
-
-    /**
-     * @param string $street_number
-     */
-    public function setStreetNumber($street_number)
-    {
-        $this->street_number = $street_number;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFloor()
-    {
-        return $this->floor;
-    }
-
-    /**
-     * @param string $floor
-     */
-    public function setFloor($floor)
-    {
-        $this->floor = $floor;
     }
 
     /**

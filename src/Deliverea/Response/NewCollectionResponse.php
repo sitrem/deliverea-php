@@ -28,6 +28,9 @@ class NewCollectionResponse extends AbstractResponse
     /** @var string */
     protected $carrier_phone;
 
+    /** @var string */
+    protected $from_address;
+
     use ToArrayTrait;
 
     /**
@@ -86,4 +89,11 @@ class NewCollectionResponse extends AbstractResponse
         return $this->carrier_phone;
     }
 
+    /**
+     * @return string
+     */
+    public function getFromAddress()
+    {
+        return $this->from_address;
+    }
 }
