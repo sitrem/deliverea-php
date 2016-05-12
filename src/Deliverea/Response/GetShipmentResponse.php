@@ -7,6 +7,7 @@ use Deliverea\Common\CreateShipmentTrait;
 use Deliverea\Common\CreateTrackingEventTrait;
 use Deliverea\Common\ToArrayTrait;
 use Deliverea\Model\DetailedShipment;
+use Deliverea\Model\SLAData;
 use Deliverea\Model\TrackingEvents;
 
 class GetShipmentResponse extends AbstractResponse
@@ -36,8 +37,14 @@ class GetShipmentResponse extends AbstractResponse
         }
 
         $trackingEvents = new TrackingEvents($this->createTrackingEvent($response->tracking_events), $events);
+        $serviceLevelData = new SLAData(
+            $response->sla_data->tracking_start_date,
+            $response->sla_data->tracking_delivered_date,
+            $response->sla_data->tracking_current_code,
+            $response->sla_data->hours_elapsed
+        );
 
-        $this->shipment = new DetailedShipment($shipment, $from, $to, $trackingEvents);
+        $this->shipment = new DetailedShipment($shipment, $from, $to, $trackingEvents, $serviceLevelData);
 
         return $this;
     }
