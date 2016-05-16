@@ -7,16 +7,27 @@ class GetCollectionCutoffHour
     /** @var string */
     public $carrier_code;
 
-    /** @var int */
-    public $from_address_id;
+    /** @var string */
+    public $country_code;
+
+    /** @var string */
+    public $zip_code;
+
+    /** @var array */
+    public $custom_carrier_parameters;
 
     /**
+     * GetCollectionCutoffHour constructor.
      * @param $carrierCode
-     * @param $fromAddressId
+     * @param $countryCode
+     * @param $zipCode
+     * @param array $customCarrierParameters
      */
-    public function __construct($carrierCode, $fromAddressId)
+    public function __construct($carrierCode, $countryCode, $zipCode, $customCarrierParameters = [])
     {
         $this->carrier_code = $carrierCode;
-        $this->from_address_id = $fromAddressId;
+        $this->country_code = $countryCode;
+        $this->zip_code = $zipCode;
+        $this->custom_carrier_parameters = $customCarrierParameters;
     }
 }
