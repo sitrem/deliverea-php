@@ -49,25 +49,25 @@ class Deliverea
 
     /**
      * @param Shipment $shipment
-     * @param $from_address_id
+     * @param Address $from
      * @param Address $to
      * @return NewShipmentResponse
      */
-    public function newShipment(Shipment $shipment, $from_address_id, Address $to)
+    public function newShipment(Shipment $shipment, Address $from, Address $to)
     {
-        return $this->post('new-shipment', new NewShipmentRequest($shipment, $from_address_id, $to),
+        return $this->post('new-shipment', new NewShipmentRequest($shipment, $from, $to),
             new NewShipmentResponse());
     }
 
     /**
      * @param Collection $collection
-     * @param $from_address_id
+     * @param Address $from
      * @param Address $to
      * @return NewCollectionResponse
      */
-    public function newCollection(Collection $collection, $from_address_id, Address $to)
+    public function newCollection(Collection $collection, Address $from, Address $to)
     {
-        return $this->post('new-collection', new NewCollectionRequest($collection, $from_address_id, $to),
+        return $this->post('new-collection', new NewCollectionRequest($collection, $from, $to),
             new NewCollectionResponse());
     }
 
@@ -129,12 +129,14 @@ class Deliverea
 
     /**
      * @param $carrierCode
-     * @param $fromAddressId
-     * @return GetCollectionCutoffHourResponse
+     * @param $countryCode
+     * @param $zipCode
+     * @param array $customCarrierParameters
+     * @return mixed
      */
-    public function getCollectionCutoffHour($carrierCode, $fromAddressId)
+    public function getCollectionCutoffHour($carrierCode, $countryCode, $zipCode, $customCarrierParameters = [])
     {
-        return $this->get('get-collection-cutoff-hour', new GetCollectionCutoffHour($carrierCode, $fromAddressId),
+        return $this->get('get-collection-cutoff-hour', new GetCollectionCutoffHour($carrierCode, $countryCode, $zipCode, $customCarrierParameters),
             new GetCollectionCutoffHourResponse());
     }
 

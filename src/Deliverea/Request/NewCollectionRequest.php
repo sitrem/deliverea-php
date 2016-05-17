@@ -8,6 +8,10 @@ use Deliverea\Model\Shipment;
 
 class NewCollectionRequest
 {
+
+    /** @var string */
+    public $shipping_dlvr_ref;
+
     /** @var string */
     public $collection_date;
 
@@ -101,6 +105,7 @@ class NewCollectionRequest
 
     public function __construct(Collection $collection, Address $from, Address $to)
     {
+        $this->shipping_dlvr_ref = $collection->getShippingDlvrRef();
         $this->collection_date = $collection->getCollectionDate()->format('Y-m-d');
         $this->carrier_code = $collection->getCarrierCode();
         $this->service_code = $collection->getServiceCode();
