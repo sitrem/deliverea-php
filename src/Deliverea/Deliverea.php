@@ -53,7 +53,7 @@ class Deliverea
      * @param Address $to
      * @return NewShipmentResponse
      */
-    public function newShipment(Shipment $shipment, $from, Address $to)
+    public function newShipment(Shipment $shipment, Address $from, Address $to)
     {
         return $this->post('new-shipment', new NewShipmentRequest($shipment, $from, $to),
             new NewShipmentResponse());
