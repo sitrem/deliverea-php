@@ -49,7 +49,7 @@ class Deliverea
 
     /**
      * @param Shipment $shipment
-     * @param $from
+     * @param Address $from
      * @param Address $to
      * @return NewShipmentResponse
      */
