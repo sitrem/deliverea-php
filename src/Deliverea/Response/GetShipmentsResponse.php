@@ -6,6 +6,7 @@ use Deliverea\Common\CreateAddressTrait;
 use Deliverea\Common\CreateShipmentTrait;
 use Deliverea\Common\ToArrayTrait;
 use Deliverea\Model\DetailedShipment;
+use Deliverea\Model\SLAData;
 
 class GetShipmentsResponse extends AbstractResponse
 {
@@ -34,7 +35,14 @@ class GetShipmentsResponse extends AbstractResponse
             $from = $this->createAddress('from', $item->from_data);
             $to = $this->createAddress('to', $item->to_data);
 
-            $this->shipments[] = new DetailedShipment($shipment, $from, $to);
+            $serviceLevelData = new SLAData(
+                $item->sla_data->tracking_start_date,
+                $item->sla_data->tracking_delivered_date,
+                $item->sla_data->tracking_current_code,
+                $item->sla_data->hours_elapsed
+            );
+
+            $this->shipments[] = new DetailedShipment($shipment, $from, $to, null, $serviceLevelData);
         }
 
         return $this;

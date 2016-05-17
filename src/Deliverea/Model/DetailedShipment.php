@@ -19,22 +19,28 @@ class DetailedShipment extends AbstractDeliverea
     /** @var TrackingEvents */
     private $tracking_events;
 
+    /** @var SLAData */
+    private $sla_data;
+
     /**
      * @param Shipment $shipment
      * @param Address $from
      * @param Address $to
      * @param TrackingEvents $tracking_events
+     * @param SLAData $sla_data
      */
     public function __construct(
         Shipment $shipment,
         Address $from = null,
         Address $to = null,
-        TrackingEvents $tracking_events = null
+        TrackingEvents $tracking_events = null,
+        SLAData $sla_data = null
     ) {
         $this->shipment = $shipment;
         $this->from = $from;
         $this->to = $to;
         $this->tracking_events = $tracking_events;
+        $this->sla_data = $sla_data;
     }
 
     /**
@@ -99,5 +105,21 @@ class DetailedShipment extends AbstractDeliverea
     public function setTrackingEvents($tracking_events)
     {
         $this->tracking_events = $tracking_events;
+    }
+
+    /**
+     * @return SLAData
+     */
+    public function getSlaData()
+    {
+        return $this->sla_data;
+    }
+
+    /**
+     * @param SLAData $sla_data
+     */
+    public function setSlaData($sla_data)
+    {
+        $this->sla_data = $sla_data;
     }
 }
