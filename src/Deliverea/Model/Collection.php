@@ -7,6 +7,9 @@ class Collection extends AbstractDeliverea
 {
     use ToArrayTrait;
 
+    /** @var string */
+    private $shipping_dlvr_ref;
+
     /** @var \DateTime */
     private $collection_date;
 
@@ -53,6 +56,7 @@ class Collection extends AbstractDeliverea
      * @param $service_code
      * @param $hour_start_1
      * @param $hour_end_1
+     * @param $shipping_dlvr_ref
      */
     public function __construct(
         $collection_client_ref,
@@ -60,14 +64,25 @@ class Collection extends AbstractDeliverea
         $carrier_code,
         $service_code,
         $hour_start_1,
-        $hour_end_1
-    ) {
+        $hour_end_1,
+        $shipping_dlvr_ref
+    )
+    {
         $this->collection_client_ref = $collection_client_ref;
         $this->collection_date = $collection_date;
         $this->carrier_code = $carrier_code;
         $this->service_code = $service_code;
         $this->hour_start_1 = $hour_start_1;
         $this->hour_end_1 = $hour_end_1;
+        $this->shipping_dlvr_ref = $shipping_dlvr_ref;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShippingDlvrRef()
+    {
+        return $this->shipping_dlvr_ref;
     }
 
     /**

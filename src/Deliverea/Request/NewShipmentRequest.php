@@ -147,6 +147,7 @@ class NewShipmentRequest
         $this->to_phone = $to->getPhone();
         $this->to_email = $to->getEmail();
         $this->to_observations = $to->getObservations();
+
         $this->custom_carrier_parameters = $shipment->getCustomCarrierParameters();
     }
 }
