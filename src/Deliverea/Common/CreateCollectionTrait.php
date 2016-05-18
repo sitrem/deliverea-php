@@ -20,7 +20,8 @@ trait CreateCollectionTrait
             $this->getValue($details, 'carrier_code', ''),
             $this->getValue($details, 'service_code', ''),
             $this->getValue($details, 'hour_start_1', ''),
-            $this->getValue($details, 'hour_end_1', '')
+            $this->getValue($details, 'hour_end_1', ''),
+            ''
         );
 
         $collection->setCollectionDlvrRef($this->getValue($details, 'collection_dlvr_ref', ''));
