@@ -8,7 +8,7 @@ Compatibility:
 
 ## Installation
 ```
-composer require deliverea/deliverea-php 0.0.5
+composer require deliverea/deliverea-php 0.0.7
 ```
 
 ## Methods
@@ -55,10 +55,7 @@ $shipment = new \Deliverea\Model\Shipment(1, substr(md5(strtotime('now')), 0, 14
 
 $address = new \Deliverea\Model\Address(
     'Full name',
-    'Street Type',
-    'Street Name',
-    'Street Number',
-    'Floor',
+    'Address',
     'City',
     'Zip Code',
     'CountryCode',
@@ -80,10 +77,7 @@ $collection = new \Deliverea\Model\Collection(substr(md5(strtotime('now')), 0, 1
 
 $address = new \Deliverea\Model\Address(
     'Full name',
-    'Street Type',
-    'Street Name',
-    'Street Number',
-    'Floor',
+    'Address',
     'City',
     'Zip Code',
     'CountryCode',
