@@ -87,6 +87,7 @@ class Deliverea
      */
     public function getShipments($filters = [])
     {
+        $this->setUrlEndpoint('https://connector.dlvrapi.com/v1', 'http://sandbox.dlvrapi.com/v1');
         return $this->get('get-shipments', new GetShipmentsRequest($filters), new GetShipmentsResponse());
     }
 
@@ -154,6 +155,16 @@ class Deliverea
     public function getSandbox()
     {
         return $this->isSandbox;
+    }
+
+    /**
+     * @param $urlEndpoint
+     * @param $urlEndpointSandbox
+     */
+    public function setUrlEndpoint($urlEndpoint, $urlEndpointSandbox)
+    {
+        $this->baseEndpoint = $urlEndpoint;
+        $this->baseEndpointSandbox = $urlEndpointSandbox;
     }
 
     private function get($url, $request, AbstractResponse $response)
