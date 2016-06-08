@@ -156,6 +156,16 @@ class Deliverea
         return $this->isSandbox;
     }
 
+    /**
+     * @param $urlEndpoint
+     * @param $urlEndpointSandbox
+     */
+    public function setUrlEndpoint($urlEndpoint, $urlEndpointSandbox)
+    {
+        $this->baseEndpoint = $urlEndpoint;
+        $this->baseEndpointSandbox = $urlEndpointSandbox;
+    }
+
     private function get($url, $request, AbstractResponse $response)
     {
         return $this->request($url, $request, $response, 'GET');
