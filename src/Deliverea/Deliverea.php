@@ -128,15 +128,12 @@ class Deliverea
     }
 
     /**
-     * @param $carrierCode
-     * @param $countryCode
-     * @param $zipCode
-     * @param array $customCarrierParameters
+     * @param array $data
      * @return mixed
      */
-    public function getCollectionCutoffHour($carrierCode, $countryCode, $zipCode, $customCarrierParameters = [])
+    public function getCollectionCutoffHour($data)
     {
-        return $this->get('get-collection-cutoff-hour', new GetCollectionCutoffHour($carrierCode, $countryCode, $zipCode, $customCarrierParameters),
+        return $this->get('get-collection-cutoff-hour', new GetCollectionCutoffHour($data),
             new GetCollectionCutoffHourResponse());
     }
 
@@ -221,7 +218,6 @@ class Deliverea
         curl_close($ch);
 
         $result = json_decode($result);
-
         if ($result === null) {
             throw new UnexpectedResponseException($url);
         }

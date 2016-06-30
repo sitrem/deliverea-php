@@ -1,57 +1,60 @@
 <?php
 namespace Deliverea\Model;
 
+use Deliverea\Common\MagicGetAndSetTrait;
 use Deliverea\Common\ToArrayTrait;
 
 class Collection extends AbstractDeliverea
 {
     use ToArrayTrait;
 
+    use MagicGetAndSetTrait;
+
     /** @var string */
-    private $shipping_dlvr_ref;
+    public $shipping_dlvr_ref;
 
     /** @var \DateTime */
-    private $collection_date;
+    public $collection_date;
 
     /** @var string */
-    private $carrier_code;
+    public $carrier_code;
 
     /** @var string */
-    private $service_code;
+    public $service_code;
 
     /** @var string */
-    private $collection_client_ref;
+    public $collection_client_ref;
 
     /** @var string */
-    private $collection_dlvr_ref;
+    public $collection_dlvr_ref;
 
     /** @var string */
-    private $collection_carrier_ref;
+    public $collection_carrier_ref;
 
     /** @var string */
-    private $hour_start_1;
+    public $hour_start_1;
 
     /** @var string */
-    private $hour_end_1;
+    public $hour_end_1;
 
     /** @var string H:i */
-    private $hour_start_2;
+    public $hour_start_2;
 
     /** @var string H:i */
-    private $hour_end_2;
+    public $hour_end_2;
 
     /** @var double */
-    private $cash_on_delivery;
+    public $cash_on_delivery;
 
     /** @var array */
-    private $custom_carrier_parameters;
+    public $custom_carrier_parameters;
 
     /** @var \DateTime */
-    private $creation_date;
+    public $creation_date;
 
     /**
      * @param $collection_client_ref
-     * @param \DateTime $collection_date
+     * @param $collection_date
      * @param $carrier_code
      * @param $service_code
      * @param $hour_start_1
@@ -60,7 +63,7 @@ class Collection extends AbstractDeliverea
      */
     public function __construct(
         $collection_client_ref,
-        \DateTime $collection_date,
+        $collection_date,
         $carrier_code,
         $service_code,
         $hour_start_1,
