@@ -1,76 +1,76 @@
 <?php
 namespace Deliverea\Model;
 
+use Deliverea\Common\MagicGetAndSetTrait;
 use Deliverea\Common\ToArrayTrait;
 
 class Shipment extends AbstractDeliverea
 {
+    use MagicGetAndSetTrait;
+
     use ToArrayTrait;
 
     /** @var int */
-    private $parcel_number;
+    public $parcel_number;
 
     /** @var int */
-    private $parcel_weight;
+    public $parcel_weight;
 
     /** @var int */
-    private $parcel_height;
+    public $parcel_height;
 
     /** @var int */
-    private $parcel_width;
+    public $parcel_width;
 
     /** @var int */
-    private $parcel_length;
+    public $parcel_length;
 
     /** @var int */
-    private $parcel_volume;
+    public $parcel_volume;
 
     /** @var \DateTime */
-    private $shipping_date;
+    public $shipping_date;
 
     /** @var int */
-    private $docs_number;
+    public $docs_number;
 
     /** @var double */
-    private $cash_on_delivery;
+    public $cash_on_delivery;
 
     /** @var string */
-    private $service_type;
+    public $service_type;
 
     /** @var string */
-    private $carrier_code;
+    public $carrier_code;
 
     /** @var string */
-    private $original_service_code;
+    public $original_service_code;
 
     /** @var string */
-    private $service_code;
+    public $service_code;
 
     /** @var string */
-    private $shipping_client_ref;
+    public $shipping_client_ref;
 
     /** @var  string */
-    private $shipping_dlvr_ref;
+    public $shipping_dlvr_ref;
 
     /** @var string */
-    private $shipping_carrier_ref;
+    public $shipping_carrier_ref;
 
     /** @var \DateTime */
-    private $creation_date;
+    public $creation_date;
 
     /** @var string */
-    private $return_dlvr_ref;
+    public $return_dlvr_ref;
 
     /** @var bool */
-    private $is_return = false;
-
-    /** @var array */
-    private $custom_carrier_parameters = [];
+    public $is_return = false;
 
     /**
      * @param $parcel_number
      * @param $shipping_client_ref
-     * @param \DateTime $shipping_date
+     * @param $shipping_date
      * @param $service_type
      * @param $carrier_code
      * @param $service_code
@@ -78,11 +78,12 @@ class Shipment extends AbstractDeliverea
     public function __construct(
         $parcel_number,
         $shipping_client_ref,
-        \DateTime $shipping_date,
+        $shipping_date,
         $service_type,
         $carrier_code,
         $service_code
-    ) {
+    )
+    {
         $this->parcel_number = $parcel_number;
         $this->shipping_client_ref = $shipping_client_ref;
         $this->shipping_date = $shipping_date;
@@ -394,23 +395,5 @@ class Shipment extends AbstractDeliverea
     public function setIsReturn($is_return)
     {
         $this->is_return = $is_return;
-    }
-
-    /**
-     * @return array
-     */
-    public function getCustomCarrierParameters()
-    {
-        return $this->custom_carrier_parameters;
-    }
-
-    /**
-     * @param $parameter
-     * @param $value
-     * @return $this
-     */
-    public function addCustomCarrierParameter($parameter, $value)
-    {
-        $this->custom_carrier_parameters[$parameter] = $value;
     }
 }
