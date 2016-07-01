@@ -46,9 +46,6 @@ class Collection extends AbstractDeliverea
     /** @var double */
     public $cash_on_delivery;
 
-    /** @var array */
-    public $custom_carrier_parameters;
-
     /** @var \DateTime */
     public $creation_date;
 
