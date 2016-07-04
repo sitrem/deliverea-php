@@ -8,7 +8,7 @@ Compatibility:
 
 ## Installation
 ```
-composer require deliverea/deliverea-php 0.0.7
+composer require deliverea/deliverea-php 0.0.8
 ```
 
 ## Methods
@@ -19,6 +19,7 @@ composer require deliverea/deliverea-php 0.0.7
 - Get Shipment Label
 - Get Shipments
 - Get Addresses
+- Get Collection Cutoff Hour
 
 ### Exceptions
 Wrap all requests with a try catch of these exceptions or simply a standard \Exception
@@ -53,7 +54,7 @@ $deliverea->setSandbox(true);
 $shipment = new \Deliverea\Model\Shipment(1, substr(md5(strtotime('now')), 0, 14), new \DateTime(), 'custom',
     'ovirtual', 'ovirtual-servicio-19');
 
-$address = new \Deliverea\Model\Address(
+$fromAddress = new Address(
     'Full name',
     'Address',
     'City',
@@ -62,7 +63,21 @@ $address = new \Deliverea\Model\Address(
     'Phone'
 );
 
-$deliverea->newShipment($shipment, 32, $address);
+$toAddress = new \Deliverea\Model\Address(
+    'Full name',
+    'Address',
+    'City',
+    'Zip Code',
+    'CountryCode',
+    'Phone'
+);
+
+$shipment = $deliverea->newShipment($shipment, $fromAddress, $toAddress);
+```
+
+To add carrier specific parameters you can assign it to the object itself.
+```
+$shipment->parcel_type = "DOCUMENTS";
 ```
 
 ### New Collection
@@ -75,7 +90,7 @@ $deliverea = new \Deliverea\Deliverea('apiuser', 'apisecret');
 $collection = new \Deliverea\Model\Collection(substr(md5(strtotime('now')), 0, 14), new \DateTime(),
     'ovirtual', 'ovirtual-servicio-19', '11:00', '16:00');
 
-$address = new \Deliverea\Model\Address(
+$fromAddress = new Address(
     'Full name',
     'Address',
     'City',
@@ -84,7 +99,16 @@ $address = new \Deliverea\Model\Address(
     'Phone'
 );
 
-$deliverea->newCollection($collection, 32, $address);
+$toAddress = new \Deliverea\Model\Address(
+    'Full name',
+    'Address',
+    'City',
+    'Zip Code',
+    'CountryCode',
+    'Phone'
+);
+
+$collection = $deliverea->newCollection($collection, $fromAddress, $toAddress);
 ```
 
 ### Get Shipment Tracking
@@ -113,4 +137,14 @@ $deliverea->getShipments([
 ### Get Addresses
 ```
 $address = $deliverea->getAddresses();
+```
+
+### Get Collection Cutoff Hour
+```
+$cutoffHour = $this->delivereaClient->getCollectionCutoffHour([
+            'zip_code' => '12345',
+            'country_code' => 'ES',
+            'service_code' => 'ovirtual-servicio-19',
+            'carrier_code' => 'ovirtual'
+        ]);
 ```
