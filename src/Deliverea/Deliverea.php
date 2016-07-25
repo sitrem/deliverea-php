@@ -10,6 +10,7 @@ use Deliverea\Model\Shipment;
 use Deliverea\Request\GetAddressesRequest;
 use Deliverea\Request\GetCollectionCutoffHour;
 use Deliverea\Request\GetCollectionsRequest;
+use Deliverea\Request\GetServiceInfoRequest;
 use Deliverea\Request\GetShipmentLabelRequest;
 use Deliverea\Request\GetShipmentRequest;
 use Deliverea\Request\GetShipmentsRequest;
@@ -20,6 +21,7 @@ use Deliverea\Response\AbstractResponse;
 use Deliverea\Response\GetAddressesResponse;
 use Deliverea\Response\GetCollectionCutoffHourResponse;
 use Deliverea\Response\GetCollectionsResponse;
+use Deliverea\Response\GetServiceInfoResponse;
 use Deliverea\Response\GetShipmentLabelResponse;
 use Deliverea\Response\GetShipmentResponse;
 use Deliverea\Response\GetShipmentsResponse;
@@ -116,6 +118,31 @@ class Deliverea
     {
         return $this->get('get-shipment-tracking', new GetShipmentTrackingRequest($dlvrReference),
             new GetShipmentTrackingResponse());
+    }
+
+    /**
+     * @return GetServiceInfoResponse
+     */
+    public function getServiceInfo(
+        $carrierCode,
+        $serviceCode,
+        $fromCountryCode,
+        $fromZipCode,
+        $toCountryCode,
+        $toZipCode
+    ) {
+        return $this->get(
+            'get-service-info',
+            new GetServiceInfoRequest(
+                $carrierCode,
+                $serviceCode,
+                $fromCountryCode,
+                $fromZipCode,
+                $toCountryCode,
+                $toZipCode
+            ),
+            new GetServiceInfoResponse()
+        );
     }
 
     /**
