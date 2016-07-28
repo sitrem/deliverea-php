@@ -9,6 +9,7 @@ use Deliverea\Model\Address;
 use Deliverea\Model\Shipment;
 use Deliverea\Request\GetAddressesRequest;
 use Deliverea\Request\GetClientCarriersRequest;
+use Deliverea\Request\GetClientServicesRequest;
 use Deliverea\Request\GetCollectionCutoffHour;
 use Deliverea\Request\GetCollectionsRequest;
 use Deliverea\Request\GetServiceInfoRequest;
@@ -21,6 +22,7 @@ use Deliverea\Request\NewShipmentRequest;
 use Deliverea\Response\AbstractResponse;
 use Deliverea\Response\GetAddressesResponse;
 use Deliverea\Response\GetClientCarriersResponse;
+use Deliverea\Response\GetClientServicesResponse;
 use Deliverea\Response\GetCollectionCutoffHourResponse;
 use Deliverea\Response\GetCollectionsResponse;
 use Deliverea\Response\GetServiceInfoResponse;
@@ -156,9 +158,32 @@ class Deliverea
             new GetAddressesResponse());
     }
 
+    /**
+     * @return GetClientCarriersResponse
+     */
     public function getClientCarriers()
     {
         return $this->get('get-client-carriers', new GetClientCarriersRequest(), new GetClientCarriersResponse());
+    }
+
+    /**
+     * @param null $carrierCode
+     * @param null $serviceCode
+     * @param null $serviceRegion
+     * @param null $serviceType
+     * @param null $status
+     * @return GetClientServicesResponse
+     */
+    public function getClientServices(
+        $carrierCode = null,
+        $serviceCode = null,
+        $serviceRegion = null,
+        $serviceType = null,
+        $status = null
+    ) {
+        return $this->get('get-client-services',
+            new GetClientServicesRequest($carrierCode, $serviceCode, $serviceRegion, $serviceType, $status),
+            new GetClientServicesResponse());
     }
 
     /**
@@ -252,6 +277,7 @@ class Deliverea
         curl_close($ch);
 
         $result = json_decode($result);
+
         if ($result === null) {
             throw new UnexpectedResponseException($url);
         }

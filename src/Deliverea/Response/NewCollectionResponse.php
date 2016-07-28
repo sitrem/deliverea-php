@@ -6,7 +6,6 @@ use Deliverea\Common\ToArrayTrait;
 
 class NewCollectionResponse extends AbstractResponse
 {
-
     /** @var string */
     protected $collection_dlvr_ref;
 
@@ -27,9 +26,6 @@ class NewCollectionResponse extends AbstractResponse
 
     /** @var string */
     protected $carrier_phone;
-
-    /** @var string */
-    protected $from_address;
 
     use ToArrayTrait;
 
@@ -87,13 +83,5 @@ class NewCollectionResponse extends AbstractResponse
     public function getCarrierPhone()
     {
         return $this->carrier_phone;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFromAddress()
-    {
-        return $this->from_address;
     }
 }

@@ -16,7 +16,13 @@ class Carrier extends AbstractDeliverea
     /** @var int */
     protected $status;
 
-    public function __construct($carrierName, $carrierCode, $status)
+    /**
+     * Carrier constructor.
+     * @param string $carrierName
+     * @param string $carrierCode
+     * @param int $status
+     */
+    public function __construct($carrierName, $carrierCode, $status = null)
     {
         $this->carrier_name = $carrierName;
         $this->carrier_code = $carrierCode;
