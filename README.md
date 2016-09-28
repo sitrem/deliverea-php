@@ -8,17 +8,19 @@ Compatibility:
 
 ## Installation
 ```
-composer require deliverea/deliverea-php 0.0.8
+composer require deliverea/deliverea-php 0.0.9
 ```
 
 ## Methods
+- Get Client Carriers
+- Get Client Services
+- Get Service Info
 - New Shipment
 - New Collection
 - Get Shipment
 - Get Shipment Tracking
 - Get Shipment Label
 - Get Shipments
-- Get Addresses
 - Get Collection Cutoff Hour
 
 ### Exceptions
@@ -38,7 +40,35 @@ try {
 } catch (\Deliverea\Exception\UnexpectedResponseException $e) {
 
 }
- 
+```
+
+### Get Client Carriers
+```
+$delivereaClient->getClientCarriers();
+```
+
+### Get Client Services
+All parameters in this method are optional, status can be 0, 1 or null.
+```
+$delivereaClient->getClientServices(
+    'Carrier Code',
+    'Service Code',
+    'Service Region',
+    'Service Type',
+    'Status'
+);
+```
+
+### Get Service Info
+```
+$delivereaClient->getServiceInfo(
+    'Carrier Code',
+    'Service Code',
+    'From Country Code',
+    'From Zip Code',
+    'To Country Code',
+    'To Zip Code'
+);
 ```
 
 ### New Shipment
@@ -55,11 +85,11 @@ $shipment = new \Deliverea\Model\Shipment(1, substr(md5(strtotime('now')), 0, 14
     'ovirtual', 'ovirtual-servicio-19');
 
 $fromAddress = new Address(
-    'Full name',
+    'Full Name',
     'Address',
     'City',
     'Zip Code',
-    'CountryCode',
+    'Country Code',
     'Phone'
 );
 
@@ -68,7 +98,7 @@ $toAddress = new \Deliverea\Model\Address(
     'Address',
     'City',
     'Zip Code',
-    'CountryCode',
+    'Country Code',
     'Phone'
 );
 
@@ -91,11 +121,11 @@ $collection = new \Deliverea\Model\Collection(substr(md5(strtotime('now')), 0, 1
     'ovirtual', 'ovirtual-servicio-19', '11:00', '16:00');
 
 $fromAddress = new Address(
-    'Full name',
+    'Full Name',
     'Address',
     'City',
     'Zip Code',
-    'CountryCode',
+    'Country Code',
     'Phone'
 );
 
@@ -104,7 +134,7 @@ $toAddress = new \Deliverea\Model\Address(
     'Address',
     'City',
     'Zip Code',
-    'CountryCode',
+    'Country Code',
     'Phone'
 );
 
@@ -132,11 +162,6 @@ $deliverea->getShipments([
     'filter_shipping_dlvr_ref' => 'dlvrref'
     ...
 ]);
-```
-
-### Get Addresses
-```
-$address = $deliverea->getAddresses();
 ```
 
 ### Get Collection Cutoff Hour
