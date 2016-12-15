@@ -19,16 +19,21 @@ class SLAData extends AbstractDeliverea
     /** @var int */
     private $hours_elapsed;
 
+    /** @var int */
+    private $service_sla_hours;
+
     public function __construct(
         $tracking_start_date = null,
         $tracking_delivered_date = null,
         $tracking_current_code = null,
-        $hours_elapsed = 0
+        $hours_elapsed = 0,
+        $service_sla_hours = 0
     ) {
         $this->tracking_start_date = $tracking_start_date;
         $this->tracking_delivered_date = $tracking_delivered_date;
         $this->tracking_current_code = $tracking_current_code;
         $this->hours_elapsed = $hours_elapsed;
+        $this->service_sla_hours = $service_sla_hours;
     }
 
     /**
@@ -44,7 +49,7 @@ class SLAData extends AbstractDeliverea
      */
     public function getTrackingDeliveredDate()
     {
-        return $this->$tracking_delivered_date;
+        return $this->tracking_delivered_date;
     }
 
     /**
@@ -63,5 +68,11 @@ class SLAData extends AbstractDeliverea
         return $this->hours_elapsed;
     }
 
-
+    /**
+     * @return int
+     */
+    public function getServiceSlaHours()
+    {
+        return $this->service_sla_hours;
+    }
 }
