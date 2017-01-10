@@ -13,7 +13,11 @@ trait ToArrayTrait
                 $data[$key] = $value->toArray();
             } else if (is_array($value)) {
                 foreach ($value as $key2 => $item) {
-                    $data[$key][$key2] = $item->toArray();
+                    if (is_object($item) && method_exists($item, 'toArray')) {
+                        $data[$key][$key2] = $item->toArray();
+                    } else{
+                        $data[$key][$key2] = $item;
+                    }
                 }
             } else {
                 $data[$key] = $value;
