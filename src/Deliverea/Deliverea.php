@@ -270,6 +270,18 @@ class Deliverea
 
         $result = curl_exec($ch);
 
+        // API Errors
+//        $message = $result->data->errorMessage;
+//        $matches = array();
+//        $match = preg_match('/^(.*?):/s', $message, $matches);
+//        if (isset($matches[1])) {
+//            $result->data->errorField = $matches[1];
+//            $result->data->errorMessage = str_replace($matches[1] . ": ", "", $result->data->errorMessage);
+//        }
+        // El $result ahora devolverá un campo errorField (con el nombre del campo que falla).
+        // En el caso que no se especifique ningún campo, no se crea este elemento
+        // También se borra del errorMessage el nombre del campo
+
         if (curl_errno($ch)) {
             throw new CurlException($url);
         }
