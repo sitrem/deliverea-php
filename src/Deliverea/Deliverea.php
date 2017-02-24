@@ -40,8 +40,8 @@ class Deliverea
 
     private $isSandbox = false;
 
-    private $baseEndpoint = 'https://dlvrapi.com/v1';
-    private $baseEndpointSandbox = 'https://sandbox.dlvrapi.com/v1';
+    private $baseEndpoint = 'http://dev.api.deliverea.com/v1';
+    private $baseEndpointSandbox = 'http://dev.api.deliverea.com/v1';
 
     /**
      * @param $username
@@ -271,14 +271,15 @@ class Deliverea
         $result = curl_exec($ch);
 
         // API Errors
-//        $message = $result->data->errorMessage;
+//        $resultArray = json_decode($result);
+//        $message = $resultArray->data->errorMessage;
 //        $matches = array();
-//        $match = preg_match('/^(.*?):/s', $message, $matches);
-//        if (isset($matches[1])) {
-//            $result->data->errorField = $matches[1];
-//            $result->data->errorMessage = str_replace($matches[1] . ": ", "", $result->data->errorMessage);
+//        if (preg_match('/^(.*?):/s', $message, $matches)) {
+//            $resultArray->data->errorField = $matches[1];
+//            $resultArray->data->errorMessage = str_replace($matches[1] . ": ", "", $resultArray->data->errorMessage);
 //        }
-        // El $result ahora devolverá un campo errorField (con el nombre del campo que falla).
+//        print_r($resultArray);exit;
+        // El $resultArray ahora devolverá un campo errorField (con el nombre del campo que falla).
         // En el caso que no se especifique ningún campo, no se crea este elemento
         // También se borra del errorMessage el nombre del campo
 
