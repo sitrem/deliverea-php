@@ -42,7 +42,8 @@ class GetShipmentsResponse extends AbstractResponse
                 $item->sla_data->tracking_delivered_date,
                 $item->sla_data->tracking_current_code,
                 $item->sla_data->hours_elapsed,
-                $item->sla_data->service_sla_hours
+                $item->sla_data->service_sla_hours,
+                $item->sla_data->delivery_hour_limit
             );
 
             $trackingData = null;
