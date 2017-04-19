@@ -5,6 +5,7 @@ namespace Deliverea\Response;
 use Deliverea\Common\CreateAddressTrait;
 use Deliverea\Common\CreateShipmentTrait;
 use Deliverea\Common\ToArrayTrait;
+use Deliverea\Model\CustomCarrierParametersData;
 use Deliverea\Model\DetailedShipment;
 use Deliverea\Model\SLAData;
 use Deliverea\Model\TrackingEvent;
@@ -62,7 +63,9 @@ class GetShipmentsResponse extends AbstractResponse
                     $item->tracking_data);
             }
 
-            $this->shipments[] = new DetailedShipment($shipment, $from, $to, $trackingData, $serviceLevelData);
+            $customCarrierParameters = new CustomCarrierParametersData($item->custom_carrier_parameters);
+
+            $this->shipments[] = new DetailedShipment($shipment, $from, $to, $trackingData, $serviceLevelData, $customCarrierParameters);
         }
 
         return $this;

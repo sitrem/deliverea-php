@@ -22,25 +22,31 @@ class DetailedShipment extends AbstractDeliverea
     /** @var SLAData */
     private $sla_data;
 
+    /** @var CustomCarrierParametersData */
+    private $custom_carrier_parameters;
+
     /**
      * @param Shipment $shipment
      * @param Address $from
      * @param Address $to
      * @param TrackingEvents $tracking_events
      * @param SLAData $sla_data
+     * @param CustomCarrierParametersData $customCarrierParameters
      */
     public function __construct(
         Shipment $shipment,
         Address $from = null,
         Address $to = null,
         TrackingEvents $tracking_events = null,
-        SLAData $sla_data = null
+        SLAData $sla_data = null,
+        CustomCarrierParametersData $customCarrierParameters = null
     ) {
         $this->shipment = $shipment;
         $this->from = $from;
         $this->to = $to;
         $this->tracking_events = $tracking_events;
         $this->sla_data = $sla_data;
+        $this->custom_carrier_parameters = $customCarrierParameters;
     }
 
     /**
@@ -121,5 +127,10 @@ class DetailedShipment extends AbstractDeliverea
     public function setSlaData($sla_data)
     {
         $this->sla_data = $sla_data;
+    }
+
+    public function getCustomCarrierParameters()
+    {
+        return $this->custom_carrier_parameters;
     }
 }
