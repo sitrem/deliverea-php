@@ -1,6 +1,8 @@
 <?php
+
 namespace Deliverea;
 
+use App\Http\Responses\ClientAreaResponse;
 use Deliverea\Exception\CurlException;
 use Deliverea\Exception\ErrorResponseException;
 use Deliverea\Exception\UnexpectedResponseException;
@@ -20,6 +22,7 @@ use Deliverea\Request\GetShipmentTrackingRequest;
 use Deliverea\Request\NewCollectionRequest;
 use Deliverea\Request\NewShipmentRequest;
 use Deliverea\Response\AbstractResponse;
+use Deliverea\Response\ApiErrorResponse;
 use Deliverea\Response\GetAddressesResponse;
 use Deliverea\Response\GetClientCarriersResponse;
 use Deliverea\Response\GetClientServicesResponse;
@@ -32,6 +35,7 @@ use Deliverea\Response\GetShipmentsResponse;
 use Deliverea\Response\GetShipmentTrackingResponse;
 use Deliverea\Response\NewCollectionResponse;
 use Deliverea\Response\NewShipmentResponse;
+use Illuminate\Http\Exception\HttpResponseException;
 
 class Deliverea
 {
@@ -40,8 +44,8 @@ class Deliverea
 
     private $isSandbox = false;
 
-    private $baseEndpoint = 'https://dlvrapi.com/v1';
-    private $baseEndpointSandbox = 'https://sandbox.dlvrapi.com/v1';
+    private $baseEndpoint = 'http://dev.api.deliverea.com/v1';
+    private $baseEndpointSandbox = 'http://dev.api.deliverea.com/v1';
 
     /**
      * @param $username
@@ -134,7 +138,8 @@ class Deliverea
         $fromZipCode,
         $toCountryCode,
         $toZipCode
-    ) {
+    )
+    {
         return $this->get(
             'get-service-info',
             new GetServiceInfoRequest(
@@ -180,7 +185,8 @@ class Deliverea
         $serviceRegion = null,
         $serviceType = null,
         $status = null
-    ) {
+    )
+    {
         return $this->get('get-client-services',
             new GetClientServicesRequest($carrierCode, $serviceCode, $serviceRegion, $serviceType, $status),
             new GetClientServicesResponse());
@@ -247,7 +253,7 @@ class Deliverea
         if ($this->getSandbox()) {
             $endpoint = $this->baseEndpointSandbox;
         }
-
+        $holi = $url;
         $url = $endpoint . '/' . $url;
 
         if ($type == 'GET') {
@@ -284,7 +290,10 @@ class Deliverea
 
         if ($result->status === 'err') {
             if (is_object($result->data) && property_exists($result->data, 'errorCode')) {
-                throw new ErrorResponseException($result->data->errorCode, $result->data->errorMessage);
+                $carrierErrorCode = isset($result->data->carrierErrorCode) ? $result->data->carrierErrorCode : null;
+                $carrierErrorMessage = isset($result->data->carrierErrorMessage) ? $result->data->carrierErrorMessage : null;
+
+                throw new ErrorResponseException($result->data->errorCode, $result->data->errorMessage, $carrierErrorCode, $carrierErrorMessage);
             } else {
                 throw new ErrorResponseException(-1, $result->data[0]);
             }
