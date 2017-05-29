@@ -1,6 +1,6 @@
 <?php
 namespace Deliverea;
-
+use App\Http\Responses\ClientAreaResponse;
 use Deliverea\Exception\CurlException;
 use Deliverea\Exception\ErrorResponseException;
 use Deliverea\Exception\UnexpectedResponseException;
@@ -20,6 +20,7 @@ use Deliverea\Request\GetShipmentTrackingRequest;
 use Deliverea\Request\NewCollectionRequest;
 use Deliverea\Request\NewShipmentRequest;
 use Deliverea\Response\AbstractResponse;
+use Deliverea\Response\ApiErrorResponse;
 use Deliverea\Response\GetAddressesResponse;
 use Deliverea\Response\GetClientCarriersResponse;
 use Deliverea\Response\GetClientServicesResponse;
@@ -32,17 +33,14 @@ use Deliverea\Response\GetShipmentsResponse;
 use Deliverea\Response\GetShipmentTrackingResponse;
 use Deliverea\Response\NewCollectionResponse;
 use Deliverea\Response\NewShipmentResponse;
-
+use Illuminate\Http\Exception\HttpResponseException;
 class Deliverea
 {
     private $username = '';
     private $password = '';
-
     private $isSandbox = false;
-
-    private $baseEndpoint = 'https://dlvrapi.com/v1';
-    private $baseEndpointSandbox = 'https://sandbox.dlvrapi.com/v1';
-
+    private $baseEndpoint = 'http://dev.api.deliverea.com/v1';
+    private $baseEndpointSandbox = 'http://dev.api.deliverea.com/v1';
     /**
      * @param $username
      * @param $password
@@ -52,7 +50,6 @@ class Deliverea
         $this->username = $username;
         $this->password = $password;
     }
-
     /**
      * @param Shipment $shipment
      * @param Address $from
@@ -64,7 +61,6 @@ class Deliverea
         return $this->post('new-shipment', new NewShipmentRequest($shipment, $from, $to),
             new NewShipmentResponse());
     }
-
     /**
      * @param Collection $collection
      * @param Address $from
@@ -76,7 +72,6 @@ class Deliverea
         return $this->post('new-collection', new NewCollectionRequest($collection, $from, $to),
             new NewCollectionResponse());
     }
-
     /**
      * @param $dlvrReference
      * @return GetShipmentLabelResponse
@@ -86,7 +81,6 @@ class Deliverea
         return $this->get('get-shipment-label', new GetShipmentLabelRequest($dlvrReference),
             new GetShipmentLabelResponse());
     }
-
     /**
      * @param array $filters
      * @return array
@@ -95,7 +89,6 @@ class Deliverea
     {
         return $this->get('get-shipments', new GetShipmentsRequest($filters), new GetShipmentsResponse());
     }
-
     /**
      * @param array $filters
      * @return array
@@ -104,7 +97,6 @@ class Deliverea
     {
         return $this->get('get-collections', new GetCollectionsRequest($filters), new GetCollectionsResponse());
     }
-
     /**
      * @param $dlvrReference
      * @return GetShipmentResponse
@@ -113,7 +105,6 @@ class Deliverea
     {
         return $this->get('get-shipment', new GetShipmentRequest($dlvrReference), new GetShipmentResponse());
     }
-
     /**
      * @param $dlvrReference
      * @return GetShipmentTrackingResponse
@@ -123,7 +114,6 @@ class Deliverea
         return $this->get('get-shipment-tracking', new GetShipmentTrackingRequest($dlvrReference),
             new GetShipmentTrackingResponse());
     }
-
     /**
      * @return GetServiceInfoResponse
      */
@@ -134,7 +124,8 @@ class Deliverea
         $fromZipCode,
         $toCountryCode,
         $toZipCode
-    ) {
+    )
+    {
         return $this->get(
             'get-service-info',
             new GetServiceInfoRequest(
@@ -148,7 +139,6 @@ class Deliverea
             new GetServiceInfoResponse()
         );
     }
-
     /**
      * @return GetAddressesResponse
      */
@@ -157,7 +147,6 @@ class Deliverea
         return $this->get('get-addresses', new GetAddressesRequest(),
             new GetAddressesResponse());
     }
-
     /**
      * @return GetClientCarriersResponse
      */
@@ -165,7 +154,6 @@ class Deliverea
     {
         return $this->get('get-client-carriers', new GetClientCarriersRequest(), new GetClientCarriersResponse());
     }
-
     /**
      * @param null $carrierCode
      * @param null $serviceCode
@@ -180,12 +168,12 @@ class Deliverea
         $serviceRegion = null,
         $serviceType = null,
         $status = null
-    ) {
+    )
+    {
         return $this->get('get-client-services',
             new GetClientServicesRequest($carrierCode, $serviceCode, $serviceRegion, $serviceType, $status),
             new GetClientServicesResponse());
     }
-
     /**
      * @param array $data
      * @return mixed
@@ -195,7 +183,6 @@ class Deliverea
         return $this->get('get-collection-cutoff-hour', new GetCollectionCutoffHour($data),
             new GetCollectionCutoffHourResponse());
     }
-
     /**
      * @param bool $sandbox
      */
@@ -203,7 +190,6 @@ class Deliverea
     {
         $this->isSandbox = $sandbox;
     }
-
     /**
      * @return bool
      */
@@ -211,7 +197,6 @@ class Deliverea
     {
         return $this->isSandbox;
     }
-
     /**
      * @param $urlEndpoint
      * @param $urlEndpointSandbox
@@ -221,39 +206,30 @@ class Deliverea
         $this->baseEndpoint = $urlEndpoint;
         $this->baseEndpointSandbox = $urlEndpointSandbox;
     }
-
     private function get($url, $request, AbstractResponse $response)
     {
         return $this->request($url, $request, $response, 'GET');
     }
-
     private function post($url, $request, AbstractResponse $response)
     {
         return $this->request($url, $request, $response, 'POST');
     }
-
     private function request($url, $request, AbstractResponse $response, $type)
     {
         // TODO: Test invalid credentials
-
         if (empty($this->username) || empty($this->password)) {
             throw new \Exception("Please provide your API credentials");
         }
-
         $params = http_build_query($request);
-
         $endpoint = $this->baseEndpoint;
-
         if ($this->getSandbox()) {
             $endpoint = $this->baseEndpointSandbox;
         }
-
+        $holi = $url;
         $url = $endpoint . '/' . $url;
-
         if ($type == 'GET') {
             $url .= '?' . $params;
         }
-
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_USERPWD, $this->username . ":" . $this->password);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -262,34 +238,28 @@ class Deliverea
         curl_setopt($ch, CURLOPT_FORBID_REUSE, true);
         curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
         curl_setopt($ch, CURLOPT_URL, $url);
-
         if ($type == 'POST') {
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
         }
-
         $result = curl_exec($ch);
-
         if (curl_errno($ch)) {
             throw new CurlException($url);
         }
-
         curl_close($ch);
-
         $result = json_decode($result);
-
         if ($result === null) {
             throw new UnexpectedResponseException($url);
         }
-
         if ($result->status === 'err') {
             if (is_object($result->data) && property_exists($result->data, 'errorCode')) {
-                throw new ErrorResponseException($result->data->errorCode, $result->data->errorMessage);
+                $carrierErrorCode = isset($result->data->carrierErrorCode) ? $result->data->carrierErrorCode : null;
+                $carrierErrorMessage = isset($result->data->carrierErrorMessage) ? $result->data->carrierErrorMessage : null;
+                throw new ErrorResponseException($result->data->errorCode, $result->data->errorMessage, $carrierErrorCode, $carrierErrorMessage);
             } else {
                 throw new ErrorResponseException(-1, $result->data[0]);
             }
         }
-
         return $response->map($result->data);
     }
 }
