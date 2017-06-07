@@ -2,7 +2,6 @@
 
 namespace Deliverea;
 
-use App\Http\Responses\ClientAreaResponse;
 use Deliverea\Exception\CurlException;
 use Deliverea\Exception\ErrorResponseException;
 use Deliverea\Exception\UnexpectedResponseException;
@@ -22,7 +21,6 @@ use Deliverea\Request\GetShipmentTrackingRequest;
 use Deliverea\Request\NewCollectionRequest;
 use Deliverea\Request\NewShipmentRequest;
 use Deliverea\Response\AbstractResponse;
-use Deliverea\Response\ApiErrorResponse;
 use Deliverea\Response\GetAddressesResponse;
 use Deliverea\Response\GetClientCarriersResponse;
 use Deliverea\Response\GetClientServicesResponse;
@@ -35,7 +33,6 @@ use Deliverea\Response\GetShipmentsResponse;
 use Deliverea\Response\GetShipmentTrackingResponse;
 use Deliverea\Response\NewCollectionResponse;
 use Deliverea\Response\NewShipmentResponse;
-use Illuminate\Http\Exception\HttpResponseException;
 
 class Deliverea
 {
@@ -44,8 +41,8 @@ class Deliverea
 
     private $isSandbox = false;
 
-    private $baseEndpoint = 'http://dev.api.deliverea.com/v1';
-    private $baseEndpointSandbox = 'http://dev.api.deliverea.com/v1';
+    private $baseEndpoint = 'https://dlvrapi.com/v1';
+    private $baseEndpointSandbox = 'https://sandbox.dlvrapi.com/v1';
 
     /**
      * @param $username
@@ -253,7 +250,7 @@ class Deliverea
         if ($this->getSandbox()) {
             $endpoint = $this->baseEndpointSandbox;
         }
-        $holi = $url;
+
         $url = $endpoint . '/' . $url;
 
         if ($type == 'GET') {
