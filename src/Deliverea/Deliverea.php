@@ -1,4 +1,5 @@
 <?php
+
 namespace Deliverea;
 
 use Deliverea\Exception\CurlException;
@@ -134,7 +135,8 @@ class Deliverea
         $fromZipCode,
         $toCountryCode,
         $toZipCode
-    ) {
+    )
+    {
         return $this->get(
             'get-service-info',
             new GetServiceInfoRequest(
@@ -180,7 +182,8 @@ class Deliverea
         $serviceRegion = null,
         $serviceType = null,
         $status = null
-    ) {
+    )
+    {
         return $this->get('get-client-services',
             new GetClientServicesRequest($carrierCode, $serviceCode, $serviceRegion, $serviceType, $status),
             new GetClientServicesResponse());
@@ -284,7 +287,10 @@ class Deliverea
 
         if ($result->status === 'err') {
             if (is_object($result->data) && property_exists($result->data, 'errorCode')) {
-                throw new ErrorResponseException($result->data->errorCode, $result->data->errorMessage);
+                $carrierErrorCode = isset($result->data->carrierErrorCode) ? $result->data->carrierErrorCode : null;
+                $carrierErrorMessage = isset($result->data->carrierErrorMessage) ? $result->data->carrierErrorMessage : null;
+
+                throw new ErrorResponseException($result->data->errorCode, $result->data->errorMessage, $carrierErrorCode, $carrierErrorMessage);
             } else {
                 throw new ErrorResponseException(-1, $result->data[0]);
             }
