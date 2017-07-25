@@ -173,6 +173,14 @@ class Shipment extends AbstractDeliverea
     }
 
     /**
+     * @param array $parcels
+     */
+    public function setParcels($parcels)
+    {
+        $this->parcels = $parcels;
+    }
+
+    /**
      * @return int
      */
     public function getParcelVolume()
