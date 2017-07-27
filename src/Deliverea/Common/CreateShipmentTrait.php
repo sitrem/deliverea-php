@@ -38,6 +38,8 @@ trait CreateShipmentTrait
         $shipment->setParcelHeight($this->getValue($details, 'parcel_height', 0));
         $shipment->setParcelLength($this->getValue($details, 'parcel_length', 0));
         $shipment->setParcelVolume($this->getValue($details, 'parcel_volume', 0));
+        $shipment->setParcels($this->getValue($data, 'parcels', null));
+
         $shipment->setReturnDlvrRef($this->getValue($details, 'return_dlvr_ref', ''));
         $shipment->setIsReturn($this->getValue($details, 'is_return', 0));
 
