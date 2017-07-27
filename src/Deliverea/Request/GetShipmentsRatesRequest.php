@@ -10,17 +10,15 @@ use Deliverea\Model\ZipCode;
 class GetShipmentsRatesRequest
 {
     /** @var  CountryCode */
-    public $originCountryCode;
+    public $from_country_code;
     /** @var  ZipCode */
-    public $originZipCode;
+    public $from_zip_code;
     /** @var  CountryCode */
-    public $destinationCountryCode;
+    public $to_country_code;
     /** @var  ZipCode */
-    public $destinationZipCode;
-    /** @var  ParcelDimensions */
-    public $dimensions;
-    /** @var  ParcelWeight */
-    public $weight;
+    public $to_zip_code;
+    /** @var array */
+    public $parcels;
 
     /**
      * GetShipmentsRatesRequest constructor.
@@ -39,11 +37,14 @@ class GetShipmentsRatesRequest
         ParcelDimensions $dimensions,
         ParcelWeight $weight
     ) {
-        $this->originCountryCode = $originCountryCode;
-        $this->originZipCode = $originZipCode;
-        $this->destinationCountryCode = $destinationCountryCode;
-        $this->destinationZipCode = $destinationZipCode;
-        $this->dimensions = $dimensions;
-        $this->weight = $weight;
+        $this->from_country_code = $originCountryCode;
+        $this->from_zip_code = $originZipCode;
+        $this->to_country_code = $destinationCountryCode;
+        $this->to_zip_code = $destinationZipCode;
+        $this->parcels[0]['parcel_weight'] = $weight->getWeight();
+        $this->parcels[0]['parcel_width'] = $dimensions->getWidth();
+        $this->parcels[0]['parcel_height'] = $dimensions->getHeight();
+        $this->parcels[0]['parcel_length'] = $dimensions->getLength();
+        $this->parcels[0]['parcel_volume'] = $dimensions->getVolume();
     }
 }
