@@ -326,7 +326,11 @@ class Deliverea
                 $carrierErrorCode = isset($result->data->carrierErrorCode) ? $result->data->carrierErrorCode : null;
                 $carrierErrorMessage = isset($result->data->carrierErrorMessage) ? $result->data->carrierErrorMessage : null;
 
-                throw new ErrorResponseException($result->data->errorCode, $result->data->errorMessage, $carrierErrorCode, $carrierErrorMessage);
+                throw new ErrorResponseException($result->data->errorCode, $result->data->errorMessage,
+                    $carrierErrorCode, $carrierErrorMessage);
+            } elseif (is_object($result->data) && property_exists($result->data, 'message')) {
+
+                throw new ErrorResponseException(-1, $result->data->message);
             } else {
                 throw new ErrorResponseException(-1, $result->data[0]);
             }
