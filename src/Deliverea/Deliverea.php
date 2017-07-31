@@ -7,7 +7,11 @@ use Deliverea\Exception\ErrorResponseException;
 use Deliverea\Exception\UnexpectedResponseException;
 use Deliverea\Model\Collection;
 use Deliverea\Model\Address;
+use Deliverea\Model\CountryCode;
+use Deliverea\Model\ParcelDimensions;
+use Deliverea\Model\ParcelWeight;
 use Deliverea\Model\Shipment;
+use Deliverea\Model\ZipCode;
 use Deliverea\Request\GetAddressesRequest;
 use Deliverea\Request\GetClientCarriersRequest;
 use Deliverea\Request\GetClientServicesRequest;
@@ -16,6 +20,7 @@ use Deliverea\Request\GetCollectionsRequest;
 use Deliverea\Request\GetServiceInfoRequest;
 use Deliverea\Request\GetShipmentLabelRequest;
 use Deliverea\Request\GetShipmentRequest;
+use Deliverea\Request\GetShipmentsRatesRequest;
 use Deliverea\Request\GetShipmentsRequest;
 use Deliverea\Request\GetShipmentTrackingRequest;
 use Deliverea\Request\NewCollectionRequest;
@@ -29,6 +34,7 @@ use Deliverea\Response\GetCollectionsResponse;
 use Deliverea\Response\GetServiceInfoResponse;
 use Deliverea\Response\GetShipmentLabelResponse;
 use Deliverea\Response\GetShipmentResponse;
+use Deliverea\Response\GetShipmentsRatesResponse;
 use Deliverea\Response\GetShipmentsResponse;
 use Deliverea\Response\GetShipmentTrackingResponse;
 use Deliverea\Response\NewCollectionResponse;
@@ -190,6 +196,36 @@ class Deliverea
     }
 
     /**
+     * @param CountryCode $originCountryCode
+     * @param ZipCode $originZipCode
+     * @param CountryCode $destinationCountryCode
+     * @param ZipCode $destinationZipCode
+     * @param ParcelDimensions $dimensions
+     * @param ParcelWeight $weight
+     *
+     * @return GetShipmentsRatesResponse
+     */
+    public function getShipmentsRates(
+        $originCountryCode,
+        $originZipCode,
+        $destinationCountryCode,
+        $destinationZipCode,
+        $dimensions,
+        $weight
+    ) {
+        return $this->get('get-shipments-rates',
+            new GetShipmentsRatesRequest(
+                $originCountryCode,
+                $originZipCode,
+                $destinationCountryCode,
+                $destinationZipCode,
+                $dimensions,
+                $weight
+            ),
+            new GetShipmentsRatesResponse());
+    }
+
+    /**
      * @param array $data
      * @return mixed
      */
@@ -290,7 +326,11 @@ class Deliverea
                 $carrierErrorCode = isset($result->data->carrierErrorCode) ? $result->data->carrierErrorCode : null;
                 $carrierErrorMessage = isset($result->data->carrierErrorMessage) ? $result->data->carrierErrorMessage : null;
 
-                throw new ErrorResponseException($result->data->errorCode, $result->data->errorMessage, $carrierErrorCode, $carrierErrorMessage);
+                throw new ErrorResponseException($result->data->errorCode, $result->data->errorMessage,
+                    $carrierErrorCode, $carrierErrorMessage);
+            } elseif (is_object($result->data) && property_exists($result->data, 'message')) {
+
+                throw new ErrorResponseException(-1, $result->data->message);
             } else {
                 throw new ErrorResponseException(-1, $result->data[0]);
             }

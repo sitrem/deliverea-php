@@ -14,6 +14,7 @@ composer require deliverea/deliverea-php 0.0.9
 ## Methods
 - Get Client Carriers
 - Get Client Services
+- Get Shipments Rates
 - Get Service Info
 - New Shipment
 - New Collection
@@ -68,6 +69,18 @@ $delivereaClient->getServiceInfo(
     'From Zip Code',
     'To Country Code',
     'To Zip Code'
+);
+```
+
+### Get Shipments Rates
+```
+$delivereaClient->getShipmentsRates(
+    new CountryCode('ES'),
+    new ZipCode('08018'),
+    new CountryCode('ES'),
+    new ZipCode('07800'),
+    new ParcelDimensions(2.0,1.0,1.0,1.0),
+    new ParcelWeight(1.5)
 );
 ```
 
