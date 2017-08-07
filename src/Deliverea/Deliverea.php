@@ -25,6 +25,7 @@ use Deliverea\Request\GetShipmentsRequest;
 use Deliverea\Request\GetShipmentTrackingRequest;
 use Deliverea\Request\NewCollectionRequest;
 use Deliverea\Request\NewShipmentRequest;
+use Deliverea\Request\GetDropPointsRequest;
 use Deliverea\Response\AbstractResponse;
 use Deliverea\Response\GetAddressesResponse;
 use Deliverea\Response\GetClientCarriersResponse;
@@ -39,6 +40,7 @@ use Deliverea\Response\GetShipmentsResponse;
 use Deliverea\Response\GetShipmentTrackingResponse;
 use Deliverea\Response\NewCollectionResponse;
 use Deliverea\Response\NewShipmentResponse;
+use Deliverea\Response\GetDropPointsResponse;
 
 class Deliverea
 {
@@ -233,6 +235,16 @@ class Deliverea
     {
         return $this->get('get-collection-cutoff-hour', new GetCollectionCutoffHour($data),
             new GetCollectionCutoffHourResponse());
+    }
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    public function getDropPoints($data)
+    {
+        return $this->get('get-drop-points', new GetDropPointsRequest($data),
+            new GetDropPointsResponse());
     }
 
     /**
