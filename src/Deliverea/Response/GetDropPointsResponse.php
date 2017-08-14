@@ -29,7 +29,7 @@ class GetDropPointsResponse extends AbstractResponse
                 $dropPoint->latitude,
                 $dropPoint->longitude,
                 $dropPoint->time_table,
-                $dropPoint->telephone
+                $dropPoint->phone
             );
         }
 

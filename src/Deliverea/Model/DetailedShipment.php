@@ -25,6 +25,9 @@ class DetailedShipment extends AbstractDeliverea
     /** @var CustomCarrierParametersData */
     private $custom_carrier_parameters;
 
+    /** @var DropPoint */
+    private $drop_point;
+
     /**
      * @param Shipment $shipment
      * @param Address $from
@@ -39,7 +42,8 @@ class DetailedShipment extends AbstractDeliverea
         Address $to = null,
         TrackingEvents $tracking_events = null,
         SLAData $sla_data = null,
-        CustomCarrierParametersData $customCarrierParameters = null
+        CustomCarrierParametersData $customCarrierParameters = null,
+        DropPoint $dropPoint = null
     ) {
         $this->shipment = $shipment;
         $this->from = $from;
@@ -47,6 +51,7 @@ class DetailedShipment extends AbstractDeliverea
         $this->tracking_events = $tracking_events;
         $this->sla_data = $sla_data;
         $this->custom_carrier_parameters = $customCarrierParameters;
+        $this->drop_point = $dropPoint;
     }
 
     /**

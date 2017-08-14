@@ -35,7 +35,7 @@ class DropPoint extends AbstractDeliverea
     protected $timetable;
 
     /** @var string */
-    protected $telephone;
+    protected $phone;
 
     /**
      * DropPoint constructor.
@@ -48,9 +48,9 @@ class DropPoint extends AbstractDeliverea
      * @param string $latitude
      * @param string $longitude
      * @param string $timetable
-     * @param string $telephone
+     * @param string $phone
      */
-    public function __construct($carrier_code, $drop_point_key, $name, $address, $zip_code, $city, $latitude, $longitude, $timetable, $telephone)
+    public function __construct($carrier_code, $drop_point_key, $name, $address, $zip_code, $city, $latitude, $longitude, $timetable, $phone)
     {
         $this->carrier_code = $carrier_code;
         $this->drop_point_key = $drop_point_key;
@@ -61,7 +61,7 @@ class DropPoint extends AbstractDeliverea
         $this->latitude = $latitude;
         $this->longitude = $longitude;
         $this->timetable = $timetable;
-        $this->telephone = $telephone;
+        $this->phone = $phone;
     }
 
     /**
@@ -211,17 +211,17 @@ class DropPoint extends AbstractDeliverea
     /**
      * @return string
      */
-    public function getTelephone()
+    public function getPhone()
     {
-        return $this->telephone;
+        return $this->phone;
     }
 
     /**
-     * @param string $telephone
+     * @param string $phone
      */
-    public function setTelephone($telephone)
+    public function setPhone($phone)
     {
-        $this->telephone = $telephone;
+        $this->phone = $phone;
     }
 
 }
