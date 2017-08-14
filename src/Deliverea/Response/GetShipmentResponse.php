@@ -4,9 +4,12 @@ namespace Deliverea\Response;
 
 use Deliverea\Common\CreateAddressTrait;
 use Deliverea\Common\CreateShipmentTrait;
+use Deliverea\Common\CreateDropPointTrait;
 use Deliverea\Common\CreateTrackingEventTrait;
 use Deliverea\Common\ToArrayTrait;
+use Deliverea\Core\DlvModels\DropPoint\DlvDropPoint;
 use Deliverea\Model\DetailedShipment;
+use Deliverea\Model\DropPoint;
 use Deliverea\Model\SLAData;
 use Deliverea\Model\TrackingEvents;
 
@@ -22,6 +25,8 @@ class GetShipmentResponse extends AbstractResponse
 
     use CreateTrackingEventTrait;
 
+    use CreateDropPointTrait;
+
     /**
      * @inheritdoc
      */
@@ -30,7 +35,10 @@ class GetShipmentResponse extends AbstractResponse
         $shipment = $this->createShipment($response);
         $to = $this->createAddress('to', $response->to_data);
         $from = $this->createAddress('from', $response->from_data);
-
+        $dropPoint = null;
+        if ($response->drop_point_data) {
+            $dropPoint = $this->createDropPoint($response->drop_point_data);
+        }
         $serviceLevelData = null;
         $trackingEvents = null;
 
@@ -54,8 +62,7 @@ class GetShipmentResponse extends AbstractResponse
             );
         };
 
-        $this->shipment = new DetailedShipment($shipment, $from, $to, $trackingEvents, $serviceLevelData);
-
+        $this->shipment = new DetailedShipment($shipment, $from, $to, $trackingEvents, $serviceLevelData, null, $dropPoint);
         return $this;
     }
 
