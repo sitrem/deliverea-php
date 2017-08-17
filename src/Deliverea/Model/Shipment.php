@@ -67,9 +67,6 @@ class Shipment extends AbstractDeliverea
     /** @var bool */
     public $is_return = false;
 
-    /** @var string */
-    public $drop_point_key;
-
     /**
      * @param $parcel_number
      * @param $shipping_client_ref
@@ -406,21 +403,5 @@ class Shipment extends AbstractDeliverea
     public function setIsReturn($is_return)
     {
         $this->is_return = $is_return;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDropPointKey()
-    {
-        return $this->drop_point_key;
-    }
-
-    /**
-     * @param string $drop_point_key
-     */
-    public function setDropPointKey($drop_point_key)
-    {
-        $this->drop_point_key = $drop_point_key;
     }
 }
