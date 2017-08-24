@@ -21,6 +21,7 @@ composer require deliverea/deliverea-php 0.0.9
 - Get Shipment
 - Get Shipment Tracking
 - Get Shipment Label
+- Get Drop Points
 - Get Shipments
 - Get Collection Cutoff Hour
 
@@ -162,6 +163,15 @@ $deliverea->getShipmentTracking('dlvrref');
 ### Get Shipment Details
 ```
 $deliverea->getShipment('dlvrref');
+```
+
+### Get Drop Points
+```
+$deliverea->getDropPoints([
+    'country_code' => 'ES',
+    'zip_code' => '08018',
+    'carrier_code' => 'mondialRelay',
+]);
 ```
 
 ### Get Shipment Label
