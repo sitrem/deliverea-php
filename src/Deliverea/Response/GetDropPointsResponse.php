@@ -3,7 +3,10 @@
 namespace Deliverea\Response;
 
 use Deliverea\Common\ToArrayTrait;
+use Deliverea\Model\Coordinates;
 use Deliverea\Model\DropPoint;
+use Deliverea\Model\TimeTable;
+use Deliverea\Model\ZipCode;
 
 class GetDropPointsResponse extends AbstractResponse
 {
@@ -24,15 +27,13 @@ class GetDropPointsResponse extends AbstractResponse
                 $dropPoint->drop_point_key,
                 $dropPoint->name,
                 $dropPoint->address,
-                $dropPoint->zip_code,
+                new ZipCode($dropPoint->zip_code),
                 $dropPoint->city,
-                $dropPoint->latitude,
-                $dropPoint->longitude,
-                $dropPoint->time_table,
-                $dropPoint->telephone
+                new Coordinates($dropPoint->latitude, $dropPoint->longitude),
+                new TimeTable($dropPoint->time_table),
+                $dropPoint->phone
             );
         }
-
         return $this;
     }
 
