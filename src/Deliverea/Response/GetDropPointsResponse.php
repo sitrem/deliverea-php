@@ -20,8 +20,7 @@ class GetDropPointsResponse extends AbstractResponse
      */
     function map($response)
     {
-
-        foreach ($response as $dropPoint) {
+        foreach ($response->drop_points as $dropPoint) {
             $this->dropPoints[] = new DropPoint(
                 $dropPoint->carrier_code,
                 $dropPoint->drop_point_key,

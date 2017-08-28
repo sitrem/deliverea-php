@@ -8,10 +8,10 @@ class DropPoint extends AbstractDeliverea
     use ToArrayTrait;
 
     /** @var string */
-    protected $carrier_code;
+    protected $carrierCode;
 
     /** @var float */
-    protected $drop_point_key;
+    protected $dropPointKey;
 
     /** @var string */
     protected $name;
@@ -20,10 +20,13 @@ class DropPoint extends AbstractDeliverea
     protected $address;
 
     /** @var string */
-    protected $zip_code;
+    protected $zipCode;
 
     /** @var string */
     protected $city;
+
+    /** @var  string */
+    protected $coordinates;
 
     /** @var string */
     protected $latitude;
@@ -32,36 +35,35 @@ class DropPoint extends AbstractDeliverea
     protected $longitude;
 
     /** @var string */
-    protected $timetable;
+    protected $timeTable;
 
     /** @var string */
-    protected $telephone;
+    protected $phone;
 
     /**
      * DropPoint constructor.
-     * @param string $carrier_code
-     * @param float $drop_point_key
+     * @param string $carrierCode
+     * @param float $dropPointKey
      * @param string $name
      * @param string $address
-     * @param string $zip_code
+     * @param ZipCode $zipCode
      * @param string $city
-     * @param string $latitude
-     * @param string $longitude
-     * @param string $timetable
-     * @param string $telephone
+     * @param Coordinates $coordinates
+     * @param TimeTable $timeTable
+     * @param string $phone
      */
-    public function __construct($carrier_code, $drop_point_key, $name, $address, $zip_code, $city, $latitude, $longitude, $timetable, $telephone)
+    public function __construct($carrierCode, $dropPointKey, $name, $address, ZipCode $zipCode, $city, Coordinates $coordinates, TimeTable $timeTable, $phone)
     {
-        $this->carrier_code = $carrier_code;
-        $this->drop_point_key = $drop_point_key;
+        $this->carrierCode = $carrierCode;
+        $this->dropPointKey = $dropPointKey;
         $this->name = $name;
         $this->address = $address;
-        $this->zip_code = $zip_code;
+        $this->zipCode = $zipCode->getZipCode();
         $this->city = $city;
-        $this->latitude = $latitude;
-        $this->longitude = $longitude;
-        $this->timetable = $timetable;
-        $this->telephone = $telephone;
+        $this->latitude = $coordinates->getLatitude();
+        $this->longitude = $coordinates->getLongitude();
+        $this->timeTable = $timeTable->getTimeTable();
+        $this->phone = $phone;
     }
 
     /**
@@ -69,15 +71,15 @@ class DropPoint extends AbstractDeliverea
      */
     public function getCarrierCode()
     {
-        return $this->carrier_code;
+        return $this->carrierCode;
     }
 
     /**
-     * @param string $carrier_code
+     * @param string $carrierCode
      */
-    public function setCarrierCode($carrier_code)
+    public function setCarrierCode($carrierCode)
     {
-        $this->carrier_code = $carrier_code;
+        $this->carrierCode = $carrierCode;
     }
 
     /**
@@ -85,15 +87,15 @@ class DropPoint extends AbstractDeliverea
      */
     public function getDropPointKey()
     {
-        return $this->drop_point_key;
+        return $this->dropPointKey;
     }
 
     /**
-     * @param float $drop_point_key
+     * @param float $dropPointKey
      */
-    public function setDropPointKey($drop_point_key)
+    public function setDropPointKey($dropPointKey)
     {
-        $this->drop_point_key = $drop_point_key;
+        $this->dropPointKey = $dropPointKey;
     }
 
     /**
@@ -133,15 +135,15 @@ class DropPoint extends AbstractDeliverea
      */
     public function getZipCode()
     {
-        return $this->zip_code;
+        return $this->zipCode;
     }
 
     /**
-     * @param string $zip_code
+     * @param string $zipCode
      */
-    public function setZipCode($zip_code)
+    public function setZipCode($zipCode)
     {
-        $this->zip_code = $zip_code;
+        $this->zipCode = $zipCode;
     }
 
     /**
@@ -195,33 +197,33 @@ class DropPoint extends AbstractDeliverea
     /**
      * @return string
      */
-    public function getTimetable()
+    public function getTimeTable()
     {
-        return $this->timetable;
+        return $this->timeTable;
     }
 
     /**
-     * @param string $timetable
+     * @param string $timeTable
      */
-    public function setTimetable($timetable)
+    public function setTimeTable($timeTable)
     {
-        $this->timetable = $timetable;
+        $this->timeTable = $timeTable;
     }
 
     /**
      * @return string
      */
-    public function getTelephone()
+    public function getPhone()
     {
-        return $this->telephone;
+        return $this->phone;
     }
 
     /**
-     * @param string $telephone
+     * @param string $phone
      */
-    public function setTelephone($telephone)
+    public function setPhone($phone)
     {
-        $this->telephone = $telephone;
+        $this->phone = $phone;
     }
 
 }
