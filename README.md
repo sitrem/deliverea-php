@@ -17,13 +17,13 @@ composer require deliverea/deliverea-php 0.0.9
 - Get Shipments Rates
 - Get Service Info
 - New Shipment
-- New Collection
-- Get Shipment
-- Get Shipment Tracking
-- Get Shipment Label
-- Get Drop Points
-- Get Shipments
 - Get Collection Cutoff Hour
+- Get Drop Points
+- New Collection
+- Get Shipment Label
+- Get Shipment
+- Get Shipments
+- Get Shipment Tracking
 
 ### Exceptions
 Wrap all requests with a try catch of these exceptions or simply a standard \Exception
@@ -61,18 +61,6 @@ $delivereaClient->getClientServices(
 );
 ```
 
-### Get Service Info
-```
-$delivereaClient->getServiceInfo(
-    'Carrier Code',
-    'Service Code',
-    'From Country Code',
-    'From Zip Code',
-    'To Country Code',
-    'To Zip Code'
-);
-```
-
 ### Get Shipments Rates
 ```
 $delivereaClient->getShipmentsRates(
@@ -82,6 +70,18 @@ $delivereaClient->getShipmentsRates(
     new ZipCode('07800'),
     new ParcelDimensions(2.0,1.0,1.0,1.0),
     new ParcelWeight(1.5)
+);
+```
+
+### Get Service Info
+```
+$delivereaClient->getServiceInfo(
+    'Carrier Code',
+    'Service Code',
+    'From Country Code',
+    'From Zip Code',
+    'To Country Code',
+    'To Zip Code'
 );
 ```
 
@@ -124,6 +124,25 @@ To add carrier specific parameters you can assign it to the object itself.
 $shipment->parcel_type = "DOCUMENTS";
 ```
 
+### Get Collection Cutoff Hour
+```
+$cutoffHour = $this->delivereaClient->getCollectionCutoffHour([
+            'zip_code' => '12345',
+            'country_code' => 'ES',
+            'service_code' => 'ovirtual-servicio-19',
+            'carrier_code' => 'ovirtual'
+        ]);
+```
+
+### Get Drop Points
+```
+$deliverea->getDropPoints([
+    'country_code' => 'ES',
+    'zip_code' => '08018',
+    'carrier_code' => 'mondialRelay',
+]);
+```
+
 ### New Collection
 ```
 // Create API Client
@@ -155,28 +174,14 @@ $toAddress = new \Deliverea\Model\Address(
 $collection = $deliverea->newCollection($collection, $fromAddress, $toAddress);
 ```
 
-### Get Shipment Tracking
-```
-$deliverea->getShipmentTracking('dlvrref');
-```
-
-### Get Shipment Details
-```
-$deliverea->getShipment('dlvrref');
-```
-
-### Get Drop Points
-```
-$deliverea->getDropPoints([
-    'country_code' => 'ES',
-    'zip_code' => '08018',
-    'carrier_code' => 'mondialRelay',
-]);
-```
-
 ### Get Shipment Label
 ```
 $deliverea->getShipmentLabel('dlvrref');
+```
+
+### Get Shipment
+```
+$deliverea->getShipment('dlvrref');
 ```
 
 ### Get the Shipments via filters in the API (not including Tracking Events)
@@ -187,12 +192,7 @@ $deliverea->getShipments([
 ]);
 ```
 
-### Get Collection Cutoff Hour
+### Get Shipment Tracking
 ```
-$cutoffHour = $this->delivereaClient->getCollectionCutoffHour([
-            'zip_code' => '12345',
-            'country_code' => 'ES',
-            'service_code' => 'ovirtual-servicio-19',
-            'carrier_code' => 'ovirtual'
-        ]);
+$deliverea->getShipmentTracking('dlvrref');
 ```
