@@ -15,6 +15,7 @@ composer require deliverea/deliverea-php 0.0.9
 - Get Client Carriers
 - Get Client Services
 - Get Shipments Rates
+- Get Shipment Time Arrival Estimation
 - Get Service Info
 - New Shipment
 - Get Collection Cutoff Hour
@@ -70,6 +71,16 @@ $delivereaClient->getShipmentsRates(
     new ZipCode('07800'),
     new ParcelDimensions(2.0,1.0,1.0,1.0),
     new ParcelWeight(1.5)
+);
+```
+### Get Shipment Time Arrival Estimation
+```
+$delivereaClient->getShipmentTimeArrivalEstimation(
+    new CountryCode('ES'),
+    new ZipCode('08018'),
+    new CountryCode('ES'),
+    new ZipCode('07800'),
+    new \DateTime()
 );
 ```
 

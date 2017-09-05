@@ -22,6 +22,7 @@ use Deliverea\Request\GetShipmentLabelRequest;
 use Deliverea\Request\GetShipmentRequest;
 use Deliverea\Request\GetShipmentsRatesRequest;
 use Deliverea\Request\GetShipmentsRequest;
+use Deliverea\Request\GetShipmentTimeArrivalEstimationRequest;
 use Deliverea\Request\GetShipmentTrackingRequest;
 use Deliverea\Request\NewCollectionRequest;
 use Deliverea\Request\NewShipmentRequest;
@@ -37,6 +38,7 @@ use Deliverea\Response\GetShipmentLabelResponse;
 use Deliverea\Response\GetShipmentResponse;
 use Deliverea\Response\GetShipmentsRatesResponse;
 use Deliverea\Response\GetShipmentsResponse;
+use Deliverea\Response\GetShipmentTimeArrivalEstimationResponse;
 use Deliverea\Response\GetShipmentTrackingResponse;
 use Deliverea\Response\NewCollectionResponse;
 use Deliverea\Response\NewShipmentResponse;
@@ -214,7 +216,8 @@ class Deliverea
         $destinationZipCode,
         $dimensions,
         $weight
-    ) {
+    )
+    {
         return $this->get('get-shipments-rates',
             new GetShipmentsRatesRequest(
                 $originCountryCode,
@@ -225,6 +228,26 @@ class Deliverea
                 $weight
             ),
             new GetShipmentsRatesResponse());
+    }
+
+
+    public function getShipmentTimeArrivalEstimation(
+        CountryCode $originCountryCode,
+        ZipCode $originZipCode,
+        CountryCode $destinationCountryCode,
+        ZipCode $destinationZipCode,
+        $shippingDate
+    )
+    {
+        return $this->get('get-shipment-time-arrival-estimation',
+            new GetShipmentTimeArrivalEstimationRequest(
+                $originCountryCode,
+                $originZipCode,
+                $destinationCountryCode,
+                $destinationZipCode,
+                $shippingDate
+            ),
+            new GetShipmentTimeArrivalEstimationResponse());
     }
 
     /**
