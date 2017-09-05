@@ -14,10 +14,6 @@ trait CreateShipmentTrait
     {
         $details = $data;
 
-        if (!empty($data->shipping_data)) {
-            $details = array_merge((array)$data->shipping_data, (array)$data->parcel_data);
-        }
-
         $shipment = new Shipment(
             $this->getValue($details, 'parcel_number', 1),
             $this->getValue($details, 'shipping_client_ref', ''),
@@ -42,8 +38,6 @@ trait CreateShipmentTrait
 
         $shipment->setReturnDlvrRef($this->getValue($details, 'return_dlvr_ref', ''));
         $shipment->setIsReturn($this->getValue($details, 'is_return', 0));
-
-        $shipment->setCreationDate(new \DateTime($this->getValue($details, 'creation_date', '')));
 
         return $shipment;
     }

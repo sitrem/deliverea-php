@@ -58,9 +58,6 @@ class Shipment extends AbstractDeliverea
     /** @var string */
     public $shipping_carrier_ref;
 
-    /** @var \DateTime */
-    public $creation_date;
-
     /** @var string */
     public $return_dlvr_ref;
 
@@ -355,22 +352,6 @@ class Shipment extends AbstractDeliverea
     public function setShippingCarrierRef($shipping_carrier_ref)
     {
         $this->shipping_carrier_ref = $shipping_carrier_ref;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreationDate()
-    {
-        return $this->creation_date;
-    }
-
-    /**
-     * @param \DateTime $creation_date
-     */
-    public function setCreationDate($creation_date)
-    {
-        $this->creation_date = $creation_date;
     }
 
     /**
