@@ -14,6 +14,10 @@ trait CreateShipmentTrait
     {
         $details = $data;
 
+        if (!empty($data->shipping_data)) {
+            $details = array_merge((array)$data->shipping_data, (array)$data->parcel_data);
+        }
+
         $shipment = new Shipment(
             $this->getValue($details, 'parcel_number', 1),
             $this->getValue($details, 'shipping_client_ref', ''),
