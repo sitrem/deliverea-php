@@ -44,6 +44,9 @@ class Address extends AbstractDeliverea
     /** @var string */
     private $drop_point;
 
+    /** @var string */
+    private $address_type;
+
     public function __construct(
         $name,
         $address,
@@ -251,5 +254,21 @@ class Address extends AbstractDeliverea
     public function setDropPoint($drop_point)
     {
         $this->drop_point = $drop_point;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddressType()
+    {
+        return $this->address_type;
+    }
+
+    /**
+     * @param string $address_type
+     */
+    public function setAddressType($address_type)
+    {
+        $this->address_type = $address_type;
     }
 }
