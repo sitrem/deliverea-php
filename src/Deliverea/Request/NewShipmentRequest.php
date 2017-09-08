@@ -12,6 +12,7 @@ class NewShipmentRequest
 
     public function __construct(Shipment $shipment, Address $from, Address $to)
     {
+
         foreach (get_object_vars($shipment) as $key => $value) {
             $this->$key = $value;
         }
@@ -22,6 +23,7 @@ class NewShipmentRequest
         $this->from_zip_code = $from->getZipCode();
         $this->from_country_code = $from->getCountryCode();
         $this->from_phone = $from->getPhone();
+        $this->from_address_type = $from->getAddressType();
 
         $this->to_nif = $to->getNif();
         $this->to_name = $to->getName();
