@@ -19,7 +19,7 @@ class GetShipmentTimeArrivalEstimationResponse extends AbstractResponse
      */
     function map($response)
     {
-        $this->bestServicePrice = new ServiceEstimation(
+        $this->bestServiceArrivalTime = new ServiceEstimation(
             $response->bestArrivalTime->serviceName,
             $response->bestArrivalTime->serviceCode,
             $response->bestArrivalTime->estimatedArrivalDate,
