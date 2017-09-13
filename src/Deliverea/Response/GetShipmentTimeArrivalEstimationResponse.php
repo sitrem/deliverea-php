@@ -41,7 +41,7 @@ class GetShipmentTimeArrivalEstimationResponse extends AbstractResponse
     /**
      * @return ServiceEstimation
      */
-    public function getBestServicePrice()
+    public function getBestServiceArrivalTime()
     {
         return $this->bestArrivalTime;
     }
@@ -49,7 +49,7 @@ class GetShipmentTimeArrivalEstimationResponse extends AbstractResponse
     /**
      * @return array
      */
-    public function getServicePrices()
+    public function getServiceArrivalTimes()
     {
         return $this->services;
     }
