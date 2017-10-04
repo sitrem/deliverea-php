@@ -37,10 +37,10 @@ class GetShipmentsRatesRequest
         ParcelDimensions $dimensions,
         ParcelWeight $weight
     ) {
-        $this->from_country_code = $originCountryCode;
-        $this->from_zip_code = $originZipCode;
-        $this->to_country_code = $destinationCountryCode;
-        $this->to_zip_code = $destinationZipCode;
+        $this->from_country_code = $originCountryCode->getCountryCode();
+        $this->from_zip_code = $originZipCode->getZipCode();
+        $this->to_country_code = $destinationCountryCode->getCountryCode();
+        $this->to_zip_code = $destinationZipCode->getZipCode();
         $this->parcels[0]['parcel_weight'] = $weight->getWeight();
         $this->parcels[0]['parcel_width'] = $dimensions->getWidth();
         $this->parcels[0]['parcel_height'] = $dimensions->getHeight();
