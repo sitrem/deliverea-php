@@ -72,8 +72,23 @@ class Deliverea
      */
     public function newShipment(Shipment $shipment, Address $from, Address $to)
     {
+        $shipment->shipping_date = $this->formatDate($shipment->shipping_date);
         return $this->post('new-shipment', new NewShipmentRequest($shipment, $from, $to),
             new NewShipmentResponse());
+    }
+
+    /**
+     * @param $shippingDate
+     * @return mixed
+     */
+    public function formatDate($shippingDate)
+    {
+        if ($shippingDate instanceof \DateTime) {
+
+            return $shippingDate->format('Y-m-d');
+        }
+
+        return $shippingDate;
     }
 
     /**
