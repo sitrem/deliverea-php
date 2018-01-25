@@ -19,6 +19,9 @@ class NewShipmentResponse extends AbstractResponse
     protected $shipping_carrier_guid;
 
     /** @var string */
+    protected $advance_tracking_url;
+
+    /** @var string */
     protected $service_type;
 
     /** @var string */
@@ -94,5 +97,13 @@ class NewShipmentResponse extends AbstractResponse
     public function getCarrierPhone()
     {
         return $this->carrier_phone;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAdvanceTrackingUrl()
+    {
+        return $this->advance_tracking_url;
     }
 }
