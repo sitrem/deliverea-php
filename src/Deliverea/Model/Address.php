@@ -47,6 +47,12 @@ class Address extends AbstractDeliverea
     /** @var string */
     private $address_type;
 
+    /** @var string */
+    private $latitude;
+
+    /** @var string */
+    private $longitude;
+
     public function __construct(
         $name,
         $address,
@@ -265,10 +271,42 @@ class Address extends AbstractDeliverea
     }
 
     /**
+     * @param string $latitude
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+    }
+
+    /**
      * @param string $address_type
      */
     public function setAddressType($address_type)
     {
         $this->address_type = $address_type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * @param string $longitude
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
     }
 }
