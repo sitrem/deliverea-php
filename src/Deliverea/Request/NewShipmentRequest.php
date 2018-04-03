@@ -24,6 +24,8 @@ class NewShipmentRequest
         $this->from_country_code = $from->getCountryCode();
         $this->from_phone = $from->getPhone();
         $this->from_address_type = $from->getAddressType();
+        $this->from_latitude = $from->getLatitude();
+        $this->from_longitude = $from->getLongitude();
 
         $this->to_nif = $to->getNif();
         $this->to_name = $to->getName();
@@ -35,5 +37,7 @@ class NewShipmentRequest
         $this->to_phone = $to->getPhone();
         $this->to_email = $to->getEmail();
         $this->to_observations = $to->getObservations();
+        $this->to_latitude = $to->getLatitude();
+        $this->to_longitude = $to->getLongitude();
     }
 }
