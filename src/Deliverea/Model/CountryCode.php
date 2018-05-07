@@ -18,7 +18,7 @@ class CountryCode
      */
     public function __construct($countryCode = null)
     {
-        if (!empty($countryCode)) {
+        if (empty($countryCode)) {
             $countryCode = self::DEFAULT_COUNTRY_CODE;
         }
 
