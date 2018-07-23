@@ -73,6 +73,7 @@ class Deliverea
     public function newShipment(Shipment $shipment, Address $from, Address $to)
     {
         $shipment->shipping_date = $this->formatDate($shipment->shipping_date);
+
         return $this->post('new-shipment', new NewShipmentRequest($shipment, $from, $to),
             new NewShipmentResponse());
     }
@@ -160,8 +161,7 @@ class Deliverea
         $fromZipCode,
         $toCountryCode,
         $toZipCode
-    )
-    {
+    ) {
         return $this->get(
             'get-service-info',
             new GetServiceInfoRequest(
@@ -207,8 +207,7 @@ class Deliverea
         $serviceRegion = null,
         $serviceType = null,
         $status = null
-    )
-    {
+    ) {
         return $this->get('get-client-services',
             new GetClientServicesRequest($carrierCode, $serviceCode, $serviceRegion, $serviceType, $status),
             new GetClientServicesResponse());
@@ -231,8 +230,7 @@ class Deliverea
         $destinationZipCode,
         $dimensions,
         $weight
-    )
-    {
+    ) {
         return $this->get('get-shipments-rates',
             new GetShipmentsRatesRequest(
                 $originCountryCode,
@@ -252,8 +250,7 @@ class Deliverea
         CountryCode $destinationCountryCode,
         ZipCode $destinationZipCode,
         $shippingDate
-    )
-    {
+    ) {
         return $this->get('get-shipment-time-arrival-estimation',
             new GetShipmentTimeArrivalEstimationRequest(
                 $originCountryCode,

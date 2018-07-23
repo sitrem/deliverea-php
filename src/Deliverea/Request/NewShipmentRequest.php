@@ -24,6 +24,7 @@ class NewShipmentRequest
         $this->from_country_code = $from->getCountryCode();
         $this->from_phone = $from->getPhone();
         $this->from_address_type = $from->getAddressType();
+        $this->from_email = $from->getEmail();
 
         $this->to_nif = $to->getNif();
         $this->to_name = $to->getName();
