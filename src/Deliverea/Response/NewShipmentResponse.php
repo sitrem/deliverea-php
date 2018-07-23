@@ -33,6 +33,9 @@ class NewShipmentResponse extends AbstractResponse
     /** @var string */
     protected $carrier_phone;
 
+    /** @var  string */
+    protected $carrier_shipping_data;
+
     use ToArrayTrait;
 
     /**
@@ -105,5 +108,13 @@ class NewShipmentResponse extends AbstractResponse
     public function getAdvanceTrackingUrl()
     {
         return $this->advance_tracking_url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCarrierShippingData()
+    {
+        return $this->carrier_shipping_data;
     }
 }
